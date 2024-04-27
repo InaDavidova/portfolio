@@ -1,7 +1,9 @@
+import ParticleConstellationBg from "./components/ParticleConstellation/ParticleConstellationBg";
+
 function App() {
   return (
     <>
-      <h1>My Portfolio</h1>
+      <ParticleConstellationBg />
     </>
   );
 }
