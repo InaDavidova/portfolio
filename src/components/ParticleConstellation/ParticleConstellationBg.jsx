@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { StyledCanvas } from "./ParticleConstellationBg.styled";
 
 class Particle {
@@ -109,7 +109,6 @@ function ParticleConstellationBg() {
     let effect = new Effect(canvas);
 
     function animate() {
-      console.log("animate");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       effect.handleParticles(ctx);
       animationFrameId = window.requestAnimationFrame(animate);

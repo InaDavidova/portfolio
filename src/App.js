@@ -1,9 +1,9 @@
-import ParticleConstellationBg from "./components/ParticleConstellation/ParticleConstellationBg";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 function App() {
   return (
     <>
-      <ParticleConstellationBg />
+      <LandingPage />
     </>
   );
 }
