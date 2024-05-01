@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { StyledCanvas } from "./ParticleConstellationBg.styled";
+import { debounce } from "../../utils/debounce";
 
 class Particle {
   constructor(effect) {
@@ -7,8 +8,8 @@ class Particle {
     this.x = Math.random() * this.effect.width;
     this.y = Math.random() * this.effect.height;
     this.radius = Math.random() + 1 * 1.2;
-    this.vx = Math.random() * 0.3;
-    this.vy = Math.random() * 0.3;
+    this.vx = Math.random() * -0.1;
+    this.vy = Math.random() * -0.2;
   }
 
   draw(ctx) {
@@ -81,17 +82,6 @@ class Effect {
   }
 }
 
-function debounce(fn, ms) {
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      timer = null;
-      fn.apply(this, arguments);
-    }, ms);
-  };
-}
-
 function ParticleConstellationBg() {
   const canvasRef = useRef(null);
 
@@ -100,7 +90,9 @@ function ParticleConstellationBg() {
       return;
     }
     const canvas = canvasRef.current;
-    const ctx = canvasRef.current.getContext("2d");
+    const ctx = canvasRef.current.getContext("2d", {
+      willReadFrequently: true,
+    });
     ctx.canvas.height = window.innerHeight;
     ctx.canvas.width = window.innerWidth;
     let animationFrameId;
