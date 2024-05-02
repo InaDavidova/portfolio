@@ -55,6 +55,7 @@ export const TitleContainer = styled.div`
   margin-left: 10%;
   background-color: transparent;
   color: #b7fae6;
+  user-select: none;
 
   & h1,
   h2 {
@@ -102,6 +103,7 @@ export const StyledImage = styled.img`
   height: 90vh;
   transform: translateY(100%);
   animation: 1.5s forwards 3s ${imageSlideUpAnimation};
+  user-select: none;
 `;
 
 export const LandingPageContainer = styled.div`

@@ -9,6 +9,8 @@ function LandingPage() {
   const [secondLine] = useState("I'm Ina,");
   return (
     <LandingPageContainer>
+      <ParticleConstellationBg />
+      <TextAnimation />
       <TitleContainer>
         <h1>
           {firstLine.split("").map((el, i) => (
@@ -35,8 +37,6 @@ function LandingPage() {
           ))}
         </h2>
       </TitleContainer>
-      <ParticleConstellationBg />
-      <TextAnimation />
       <StyledImage src={inaImage} alt="Photograph of Ina" />
     </LandingPageContainer>
   );

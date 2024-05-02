@@ -8,15 +8,14 @@ class Particle {
     this.x = Math.random() * this.effect.width;
     this.y = Math.random() * this.effect.height;
     this.radius = Math.random() + 1 * 1.2;
-    this.vx = Math.random() * -0.1;
-    this.vy = Math.random() * -0.2;
+    this.vx = (Math.random() - 0.5) / 2;
+    this.vy = (Math.random() - 0.5) / 2;
   }
 
   draw(ctx) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = "#9cffff";
-
     ctx.fill();
     ctx.stroke();
   }
