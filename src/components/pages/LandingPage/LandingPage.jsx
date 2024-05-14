@@ -1,14 +1,14 @@
-import ParticleConstellationBg from "../ParticleConstellation/ParticleConstellationBg";
-import TextAnimation from "../TextAnimation/TextAnimation";
+import ParticleConstellationBg from "../../ParticleConstellation/ParticleConstellationBg";
+import TextAnimation from "../../TextAnimation/TextAnimation";
 import { LandingPageContainer, Letter, StyledImage, TitleContainer } from "./LandingPage.styled";
-import inaImage from "../../images/ina.png";
+import inaImage from "../../../images/ina.png";
 import { Fragment, useState } from "react";
 
 function LandingPage() {
   const [firstLine] = useState("Hello there!");
   const [secondLine] = useState("I'm Ina,");
   return (
-    <LandingPageContainer>
+    <LandingPageContainer id="home">
       <ParticleConstellationBg />
       <TextAnimation />
       <TitleContainer>

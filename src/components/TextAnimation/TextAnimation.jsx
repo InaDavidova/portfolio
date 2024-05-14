@@ -65,8 +65,8 @@ class TextEffect {
       y: 0,
     };
     window.addEventListener("mousemove", (e) => {
-      this.mouse.x = e.x;
-      this.mouse.y = e.y;
+      this.mouse.x = e.offsetX;
+      this.mouse.y = e.offsetY;
     });
   }
 
