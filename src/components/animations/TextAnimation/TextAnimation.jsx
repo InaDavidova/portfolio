@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StyledCanvas } from "./TextAnimation.styled";
-import { debounce } from "../../utils/debounce";
+import { debounce } from "../../../utils/debounce";
 
 class TextParticle {
   constructor(effect, x, y, color) {

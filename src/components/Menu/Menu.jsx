@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   LineDiv,
   StyledLink,
@@ -11,14 +11,16 @@ import GirlIcon from "../svgs/GirlIcon";
 import QuestionMarkIcon from "../svgs/QuestionMarkIcon";
 import ProjectsIcon from "../svgs/ProjectsIcon";
 import ContactsIcon from "../svgs/ContactsIcon";
+import useClickOutside from "../../utils/useClickOutside";
 
 function Menu() {
-  useScrollToAnchor();
-
   const [isOpen, setIsOpen] = useState();
+  const ref = useRef();
+  useScrollToAnchor();
+  useClickOutside(ref, () => isOpen && setIsOpen(false));
 
   return (
-    <StyledMenu>
+    <StyledMenu ref={ref}>
       <StyledMenuButton $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         <LineDiv $isOpen={isOpen} $lineNumber={1} />
         <LineDiv $isOpen={isOpen} $lineNumber={2} />
@@ -28,6 +30,7 @@ function Menu() {
           to="#home"
           $linkNumber={1}
           $isOpen={isOpen}
+          $title={"Home"}
           onClick={() => setIsOpen(!isOpen)}
         >
           <GirlIcon />
@@ -36,6 +39,7 @@ function Menu() {
           to="#about"
           $linkNumber={2}
           $isOpen={isOpen}
+          $title={"About me"}
           onClick={() => setIsOpen(!isOpen)}
         >
           <QuestionMarkIcon />
@@ -44,6 +48,7 @@ function Menu() {
           to="#projects"
           $linkNumber={3}
           $isOpen={isOpen}
+          $title={"Projects"}
           onClick={() => setIsOpen(!isOpen)}
         >
           <ProjectsIcon />
@@ -52,6 +57,7 @@ function Menu() {
           to="#contacts"
           $linkNumber={4}
           $isOpen={isOpen}
+          $title={"Contacts"}
           onClick={() => setIsOpen(!isOpen)}
         >
           <ContactsIcon />

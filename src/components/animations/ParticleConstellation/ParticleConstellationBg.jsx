@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { StyledCanvas } from "./ParticleConstellationBg.styled";
-import { debounce } from "../../utils/debounce";
+import { debounce } from "../../../utils/debounce";
 
 class Particle {
   constructor(effect) {

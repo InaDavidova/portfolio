@@ -1,6 +1,11 @@
-import ParticleConstellationBg from "../../ParticleConstellation/ParticleConstellationBg";
-import TextAnimation from "../../TextAnimation/TextAnimation";
-import { LandingPageContainer, Letter, StyledImage, TitleContainer } from "./LandingPage.styled";
+import ParticleConstellationBg from "../../animations/ParticleConstellation/ParticleConstellationBg";
+import TextAnimation from "../../animations/TextAnimation/TextAnimation";
+import {
+  LandingPageContainer,
+  Letter,
+  StyledImage,
+  TitleContainer,
+} from "./LandingPage.styled";
 import inaImage from "../../../images/ina.png";
 import { Fragment, useState } from "react";
 

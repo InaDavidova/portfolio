@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
 const coordinates = {
-  1: { x: 1, y: 70 },
-  2: { x: 33, y: 60 },
-  3: { x: 58, y: 34 },
-  4: { x: 70, y: 1 },
+  1: { x: 1, y: 64 },
+  2: { x: 29, y: 51 },
+  3: { x: 51, y: 29 },
+  4: { x: 64, y: 1 },
 };
 
 const linkAnimationForward = (linkNumber) => keyframes`
@@ -118,6 +118,22 @@ export const StyledLink = styled(Link)`
 
     & svg {
       fill: #ff9900;
+    }
+
+    &::after {
+      content: "${(props) => props.$title}";
+      position: absolute;
+      top: ${(props) => (props.$linkNumber === 4 ? "20px" : "10px")};
+      left: ${(props) => (props.$linkNumber === 4 ? "30px" : "33px")};
+      color: #ff9900;
+      padding: 0 3px;
+      border-bottom: 1px solid #b7fae6;
+      box-shadow: 0 0 8px #ff9900;
+      clip-path: inset(1px 1px -8px 1px);
+      font-size: 12px;
+      white-space: nowrap;
+      /* transform: rotate(${(props) => (props.$linkNumber*15) +"deg"});
+      transform-origin: left; */
     }
   }
 `;
