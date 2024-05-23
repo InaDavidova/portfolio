@@ -35,7 +35,7 @@ export const StyledMenu = styled.div`
   top: 0;
   left: 0;
   width: 1px;
-  z-index: 1;
+  z-index: 2;
 `;
 
 export const StyledMenuButton = styled.button`
@@ -126,13 +126,15 @@ export const StyledLink = styled(Link)`
       top: ${(props) => (props.$linkNumber === 4 ? "20px" : "10px")};
       left: ${(props) => (props.$linkNumber === 4 ? "30px" : "33px")};
       color: #ff9900;
+      text-shadow: 0 0 2px #000417, 0 0 2px #000417, 0 0 2px #000417,
+        0 0 2px #000417, 0 0 2px #000417;
       padding: 0 3px;
       border-bottom: 1px solid #b7fae6;
       box-shadow: 0 0 8px #ff9900;
       clip-path: inset(1px 1px -8px 1px);
       font-size: 12px;
       white-space: nowrap;
-      /* transform: rotate(${(props) => (props.$linkNumber*15) +"deg"});
+      /* transform: rotate(${(props) => props.$linkNumber * 15 + "deg"});
       transform-origin: left; */
     }
   }

@@ -22,12 +22,12 @@ class Particle {
 
   update() {
     this.x += this.vx;
-    if (this.x > this.effect.width || this.x < 0) {
+    if (this.x > this.effect.width - this.radius || this.x < this.radius) {
       this.vx *= -1;
     }
 
     this.y += this.vy;
-    if (this.y > this.effect.height || this.y < 0) {
+    if (this.y > this.effect.height - this.radius || this.y < this.radius) {
       this.vy *= -1;
     }
   }

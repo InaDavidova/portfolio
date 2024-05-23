@@ -64,9 +64,19 @@ class TextEffect {
       x: 0,
       y: 0,
     };
+    this.innerHeight = window.innerHeight;
+    this.innerWidth = window.innerWidth;
     window.addEventListener("mousemove", (e) => {
-      this.mouse.x = e.offsetX;
-      this.mouse.y = e.offsetY;
+      if (e.pageY < this.innerHeight) {
+        this.mouse.x = e.pageX;
+        this.mouse.y = e.offsetY;
+      } else {
+        this.mouse.x = 0;
+        this.mouse.y = 0;
+      }
+    });
+    window.addEventListener("resize", () => {
+      this.innerHeight = window.innerHeight;
     });
   }
 

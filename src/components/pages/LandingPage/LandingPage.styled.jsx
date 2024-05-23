@@ -12,7 +12,7 @@ const lineAnimation = keyframes`
   }
   100% {
     left: 105%;
-}
+  }
 `;
 
 const slideUpAnimation = keyframes`
