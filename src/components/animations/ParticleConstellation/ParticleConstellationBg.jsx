@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { StyledCanvas } from "./ParticleConstellationBg.styled";
 import { debounce } from "../../../utils/debounce";
+import useElementOnScreen from "../../../utils/useElementOnScreen";
 
 class Particle {
   constructor(effect) {
@@ -82,10 +83,14 @@ class Effect {
 }
 
 function ParticleConstellationBg() {
-  const canvasRef = useRef(null);
+  const [canvasRef, isVisible] = useElementOnScreen({
+    root: null,
+    rootMargin: "100px",
+    treshold: 0.1,
+  });
 
   useEffect(() => {
-    if (!canvasRef) {
+    if (!canvasRef || !isVisible) {
       return;
     }
     const canvas = canvasRef.current;
@@ -124,7 +129,7 @@ function ParticleConstellationBg() {
       window.cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
     };
-  }, [canvasRef]);
+  }, [canvasRef, isVisible]);
 
   return <StyledCanvas ref={canvasRef} />;
 }
