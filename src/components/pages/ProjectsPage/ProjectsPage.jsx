@@ -3,7 +3,9 @@ import { ProjectsPageContainer } from "./ProjectsPage.styled";
 function ProjectsPage() {
   return (
     <ProjectsPageContainer id="projects">
-      <h1>Projects</h1>
+      {/* <StyledH1 ref={elementRef} $isVisible={isVisible}>
+        <span>My</span> <span>Projects</span>
+      </StyledH1> */}
     </ProjectsPageContainer>
   );
 }

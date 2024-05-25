@@ -4,7 +4,6 @@ import {
   AboutPageContainer,
   ImageLayer,
   SkillSetContainer,
-  StyledH1,
   StyledP,
 } from "./AboutPage.styled";
 import inaImg from "../../../images/ina2.png";
@@ -21,16 +20,12 @@ import mysqlImg from "../../../images/mysql.png";
 import nodeImg from "../../../images/node.png";
 import tsImg from "../../../images/ts.png";
 import vtkImg from "../../../images/vtk.png";
+import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
 
 function AboutPage() {
   const [mouseCordinates, setMouseCordinates] = useState({ x: 0, y: 0 });
   const [widowWidth] = useState(window.innerWidth);
   const [widowHeight] = useState(window.innerHeight);
-  const [elementRef, isVisible] = useElementOnScreen({
-    root: null,
-    rootMargin: "0px",
-    treshold: 0.1,
-  });
   const [pRef, isPVisible] = useElementOnScreen({
     root: null,
     rootMargin: "0px",
@@ -71,9 +66,7 @@ function AboutPage() {
       id="about"
       onMouseMove={(e) => setMouseCordinates({ x: e.screenX, y: e.screenY })}
     >
-      <StyledH1 ref={elementRef} $isVisible={isVisible}>
-        <span>About</span> <span>Me</span>
-      </StyledH1>
+      <AnimatedTitle text={["About", "Me"]} />
       <img src={inaImg} alt="Portrait" className="floating" />
       <StyledP ref={pRef}>{displayedText || " "}</StyledP>
 
