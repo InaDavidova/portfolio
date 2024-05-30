@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useElementOnScreen from "../../../utils/useElementOnScreen";
 import {
   AboutPageContainer,
+  FunFactsContainer,
   ImageLayer,
   SkillSetContainer,
   StyledP,
@@ -13,6 +14,7 @@ import jsImg from "../../../images/js.png";
 import reactImg from "../../../images/react.png";
 import angularImg from "../../../images/angular.png";
 import brainImg from "../../../images/brain.png";
+import funFactsImg from "../../../images/fun-facts.png";
 import expressImg from "../../../images/express.png";
 import jestImg from "../../../images/jest.png";
 import mongodbImg from "../../../images/mongodb.png";
@@ -29,14 +31,26 @@ function AboutPage() {
   const [pRef, isPVisible] = useElementOnScreen({
     root: null,
     rootMargin: "0px",
-    treshold: 0.1,
+    threshold: 0.1,
   });
-
-  const [text] = useState(
+  const [ulRef, isUlVisible] = useElementOnScreen({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.3,
+  });
+  const [summaryText] = useState(
     "As a software engineer, I'm dedicated to crafting efficient solutions that enhance user experience. My journey into tech began high above the clouds as a flight attendant. There, I mastered communication, teamwork, and quick problem-solving in dynamic environments. Beyond the world of technology, I enjoy staying active through sports and exploring new destinations and cultures. These experiences fuel my adventurous spirit and bring a fresh perspective to my work. Dive into my projects to see my tech evolution in action.".split(
       " "
     )
   );
+  const [funFacts] = useState([
+    "I can move different parts of my face, and my nose? I can wiggle it in two different ways - I'm basically the Houdini of facial expressions!",
+    "Traded in my wings for a keyboard - went from soaring through the skies to soaring through code as a software engineer!",
+    "Went from puffing to pacing! Ran my first half-marathon just six months after breaking up with my long-term relationship with cigarettes. Who knew quitting smoking would lead to sprinting towards the finish line?",
+    "In the last five years, I've had more addresses than a spy in a spy novel! From the bustling streets of Berlin to the sunny shores of Faro, then the vibrant city life of Lisbon, and finally, the romance of Paris.",
+    "My love for coconut is no joke - I'm like a coconut detective, sniffing out coconut-flavored everything wherever I go!",
+  ]);
+
   const [displayedText, setDisplayedText] = useState("");
   const [index, setIndex] = useState(0);
 
@@ -45,14 +59,14 @@ function AboutPage() {
       return;
     }
 
-    if (index < text.length) {
+    if (index < summaryText.length) {
       const timeoutId = setTimeout(() => {
-        setDisplayedText(displayedText + " " + text[index]);
+        setDisplayedText(displayedText + " " + summaryText[index]);
         setIndex(index + 1);
       }, 50);
       return () => clearTimeout(timeoutId);
     }
-  }, [index, text, displayedText, isPVisible]);
+  }, [index, summaryText, displayedText, isPVisible]);
 
   const getImageCordinates = (speed) => {
     const x = (widowWidth - mouseCordinates.x * speed) / 100;
@@ -132,7 +146,13 @@ function AboutPage() {
           $cordinates={getImageCordinates(0.8)}
         />
       </SkillSetContainer>
-      <img src={brainImg} alt="Title text" className="skilsTitle" />
+      <img src={brainImg} alt="Title text" className="subTitle" />
+      <img src={funFactsImg} alt="Title text" className="subTitle" />
+      <FunFactsContainer ref={ulRef} $isInViewport={isUlVisible}>
+        {funFacts.map((text, i) => (
+          <li key={i}>{text}</li>
+        ))}
+      </FunFactsContainer>
     </AboutPageContainer>
   );
 }

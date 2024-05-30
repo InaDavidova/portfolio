@@ -1,11 +1,10 @@
+import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
 import { ProjectsPageContainer } from "./ProjectsPage.styled";
 
 function ProjectsPage() {
   return (
     <ProjectsPageContainer id="projects">
-      {/* <StyledH1 ref={elementRef} $isVisible={isVisible}>
-        <span>My</span> <span>Projects</span>
-      </StyledH1> */}
+      <AnimatedTitle text={["My", "Projects"]} />
     </ProjectsPageContainer>
   );
 }

@@ -22,6 +22,36 @@ const floating = keyframes`
   }
 `;
 
+const itemsShow = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.7)
+  }
+  60% {
+    opacity: 1
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    animation-timing-function: cubic-bezier(0.2727, 0.0986, 0.8333, 1)
+  }
+`;
+
+const itemsHide = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    animation-timing-function: cubic-bezier(0.2727, 0.0986, 0.8333, 1)
+  }
+  40% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7)
+  }
+`;
+
 export const AboutPageContainer = styled.div`
   position: relative;
   display: flex;
@@ -37,11 +67,15 @@ export const AboutPageContainer = styled.div`
     z-index: 1;
   }
 
-  & img.skilsTitle {
+  & img.subTitle {
     max-height: 500px;
     margin: auto;
     animation: 10s linear ${floating} infinite;
     z-index: 1;
+  }
+
+  & img.subTitle:last-of-type {
+    max-height: 370px;
   }
 
   &:before {
@@ -66,7 +100,6 @@ export const StyledP = styled.p`
   font-size: 20px;
   line-height: 27px;
   letter-spacing: 1px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   z-index: 1;
 `;
 
@@ -74,8 +107,7 @@ export const SkillSetContainer = styled.div`
   position: relative;
   height: 500px;
   width: 50%;
-  margin-right: auto;
-  margin-bottom: 50px;
+  margin: 50px auto 10px 0;
   border-top: 1px solid #ffaa2a;
 `;
 
@@ -91,4 +123,46 @@ export const ImageLayer = styled.img.attrs((props) => ({
   width: 100%;
   height: 100%;
   object-fit: contain;
+`;
+
+export const FunFactsContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  height: 500px;
+  width: 50%;
+  margin: 50px 0 10px auto;
+  padding-right: 20px;
+  text-align: justify;
+  border-top: 1px solid #ffaa2a;
+  color: #b7fae6;
+  letter-spacing: 1px;
+  z-index: 1;
+
+  & li {
+    opacity: 0;
+    animation: ${(props) => (props.$isInViewport ? itemsShow : itemsHide)} 1s
+      both;
+  }
+
+  & li:nth-child(1) {
+    animation-delay: 180ms;
+  }
+
+  & li:nth-child(2) {
+    animation-delay: 145ms;
+  }
+
+  & li:nth-child(3) {
+    animation-delay: 170ms;
+  }
+
+  & li:nth-child(4) {
+    animation-delay: 75ms;
+  }
+
+  & li:nth-child(5) {
+    animation-delay: 100ms;
+  }
 `;

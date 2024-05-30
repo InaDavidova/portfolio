@@ -5,7 +5,7 @@ function AnimatedTitle({ text }) {
   const [elementRef, isVisible] = useElementOnScreen({
     root: null,
     rootMargin: "0px",
-    treshold: 0.1,
+    threshold: 0.1,
   });
 
   return (

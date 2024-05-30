@@ -86,7 +86,7 @@ function ParticleConstellationBg() {
   const [canvasRef, isVisible] = useElementOnScreen({
     root: null,
     rootMargin: "100px",
-    treshold: 0.1,
+    threshold: 0,
   });
 
   useEffect(() => {
