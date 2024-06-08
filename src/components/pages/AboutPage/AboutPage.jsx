@@ -8,20 +8,20 @@ import {
   StyledP,
 } from "./AboutPage.styled";
 import inaImg from "../../../images/ina2.png";
-import htmlImg from "../../../images/html.png";
-import cssImg from "../../../images/css.png";
-import jsImg from "../../../images/js.png";
-import reactImg from "../../../images/react.png";
-import angularImg from "../../../images/angular.png";
+import htmlImg from "../../../images/technologies/html.png";
+import cssImg from "../../../images/technologies/css.png";
+import jsImg from "../../../images/technologies/js.png";
+import reactImg from "../../../images/technologies/react.png";
+import angularImg from "../../../images/technologies/angular.png";
 import brainImg from "../../../images/brain.png";
 import funFactsImg from "../../../images/fun-facts.png";
-import expressImg from "../../../images/express.png";
-import jestImg from "../../../images/jest.png";
-import mongodbImg from "../../../images/mongodb.png";
-import mysqlImg from "../../../images/mysql.png";
-import nodeImg from "../../../images/node.png";
-import tsImg from "../../../images/ts.png";
-import vtkImg from "../../../images/vtk.png";
+import expressImg from "../../../images/technologies/express.png";
+import jestImg from "../../../images/technologies/jest.png";
+import mongodbImg from "../../../images/technologies/mongodb.png";
+import mysqlImg from "../../../images/technologies/mysql.png";
+import nodeImg from "../../../images/technologies/node.png";
+import tsImg from "../../../images/technologies/ts.png";
+import vtkImg from "../../../images/technologies/vtk.png";
 import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
 
 function AboutPage() {
