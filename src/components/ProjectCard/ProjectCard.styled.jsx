@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import inaImg from "../../images/projects/planets-little-helper1.png";
+import projectImg from "../../images/projects/planets-little-helper1.png";
 
 export const CardWrapper = styled.div`
   width: fit-content;
@@ -10,13 +10,15 @@ export const StyledCard = styled.div.attrs((props) => ({
   style: {
     width: props.$width + "px",
     height: props.$height + "px",
-    backgroundPosition: `${props.$cordinates.bx}% ${props.$cordinates.by}%`,
+    backgroundPosition: props.$openProject
+      ? "20%"
+      : `${props.$cordinates.bx}% ${props.$cordinates.by}%`,
     transform: `perspective(500px) rotateX(${props.$cordinates.rx + "deg"})
         rotateY(${props.$cordinates.ry + "deg"})`,
   },
 }))`
   position: relative;
-  background: no-repeat url(${inaImg});
+  background: no-repeat url(${projectImg});
   background-size: cover;
   transform-style: preserve-3d;
   border-radius: 5px;
@@ -25,7 +27,9 @@ export const StyledCard = styled.div.attrs((props) => ({
       ? "0 0 10px #ff9900"
       : "inset 0 0 10px black"};
   cursor: ${(props) =>
-    props.$project === props.$openProject ? "" : "pointer"};
+    props.$openProject && props.$project !== props.$openProject
+      ? "pointer"
+      : ""};
   transition: width 1s, height 1s;
 
   &:hover {
@@ -45,6 +49,7 @@ export const StyledButton = styled.button`
   border: none;
   letter-spacing: 1px;
   transform: rotate(-50deg) translateZ(20px);
+  cursor: pointer;
 
   &:hover {
     transform: rotate(-50deg) translateZ(20px) scale(1.05);
