@@ -82,7 +82,7 @@ class TextEffect {
 
   wrapText() {
     this.ctx.fillStyle = "#2cffc0";
-    this.ctx.font = this.fontSize - 20 + "px Helvetica";
+    this.ctx.font = this.fontSize - 20 + "px Arial";
     this.ctx.letterSpacing = "2px";
     this.ctx.fillText(this.text, this.textY, this.textX);
     this.convertToParticles();

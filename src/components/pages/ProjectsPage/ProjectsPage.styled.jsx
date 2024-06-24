@@ -11,8 +11,8 @@ export const ProjectCardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: ${(props) => (props.$openProject ? "" : "wrap")};
-  gap: 40px;
-  justify-content: space-around;
+  gap: 50px;
+  justify-content: center;
   padding: 30px 20px;
 `;
 
@@ -53,7 +53,7 @@ export const CarouselImage = styled.img`
       ? "100%"
       : "0%"};
   object-fit: contain;
-  aspect-ratio: 9 / 7;
+  /* aspect-ratio: 9 / 7; */
   border-radius: 5px;
   border: none;
   opacity: ${(props) =>
