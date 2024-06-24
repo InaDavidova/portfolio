@@ -21,7 +21,6 @@ export const ProjectInformationContainer = styled.div`
   display: flex;
   width: 100%;
   padding: 30px 20px;
-  border: 2px solid yellow;
 `;
 
 export const CloseButton = styled.button`
@@ -54,6 +53,7 @@ export const CarouselImage = styled.img`
       ? "100%"
       : "0%"};
   object-fit: contain;
+  aspect-ratio: 9 / 7;
   border-radius: 5px;
   border: none;
   opacity: ${(props) =>
@@ -91,13 +91,6 @@ export const ButtonRight = styled(ButtonArrow)`
   right: 10px;
 `;
 
-export const ProjectTitle = styled.h2`
-  height: fit-content;
-  margin: 10px auto;
-  color: #b7fae6;
-  letter-spacing: 1px;
-`;
-
 export const DotButtonsContainer = styled.div`
   position: absolute;
   bottom: 7%;
@@ -123,5 +116,50 @@ export const DotButton = styled.button`
 
   &:hover {
     transform: scale(1.5);
+  }
+`;
+
+export const InformationWrapper = styled.div`
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ProjectTitle = styled.h2`
+  height: fit-content;
+  margin: 10px auto 50px auto;
+  color: #ff9900;
+  text-align: center;
+  letter-spacing: 1px;
+`;
+
+export const StyledP = styled.p`
+  margin: 10px 40px;
+  color: white;
+  font-size: 18px;
+  line-height: 23px;
+  text-align: justify;
+  letter-spacing: 1px;
+`;
+
+export const GithubLink = styled.a`
+  margin: auto auto 0 auto;
+  color: white;
+  font-size: 20px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+  clip-path: inset(1px 1px -8px 1px);
+
+  & img {
+    height: 25px;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    border-bottom: 1px solid #b7fae6;
+    box-shadow: 0 0 8px #ff9900;
   }
 `;

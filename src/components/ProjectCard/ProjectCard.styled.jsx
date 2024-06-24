@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import projectImg from "../../images/projects/planets-little-helper1.png";
+import { data } from "../../utils/data";
 
 export const CardWrapper = styled.div`
   width: fit-content;
@@ -18,7 +18,7 @@ export const StyledCard = styled.div.attrs((props) => ({
   },
 }))`
   position: relative;
-  background: no-repeat url(${projectImg});
+  background: no-repeat url(${(props) => (data[props.$project]?.thumbnail)});
   background-size: cover;
   transform-style: preserve-3d;
   border-radius: 5px;
