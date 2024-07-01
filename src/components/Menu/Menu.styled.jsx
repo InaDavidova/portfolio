@@ -134,8 +134,6 @@ export const StyledLink = styled(Link)`
       clip-path: inset(1px 1px -8px 1px);
       font-size: 12px;
       white-space: nowrap;
-      /* transform: rotate(${(props) => props.$linkNumber * 15 + "deg"});
-      transform-origin: left; */
     }
   }
 `;

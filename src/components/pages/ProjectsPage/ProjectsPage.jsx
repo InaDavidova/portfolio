@@ -79,7 +79,11 @@ function ProjectsPage() {
             {numberOfImages > 1 && (
               <>
                 <ButtonLeft
-                  onClick={() => setActiveImageNumber(activeImageNumber - 1)}
+                  onClick={() =>
+                    activeImageNumber === 0
+                      ? setActiveImageNumber(numberOfImages - 1)
+                      : setActiveImageNumber(activeImageNumber - 1)
+                  }
                 >
                   <LeftArrow />
                 </ButtonLeft>
