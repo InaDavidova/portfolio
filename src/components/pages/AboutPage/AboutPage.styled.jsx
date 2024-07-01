@@ -13,6 +13,17 @@ const moveBackground = keyframes`
   }
 `;
 
+const summaryTextAnimation = keyframes`
+  0%{
+    opacity: 0;
+    transform: perspective(500px) translate3d(-35px, -40px, -150px) rotate3d(1, -1, 0, 35deg);
+  }
+  100%{
+    opacity: 1;
+    transform: perspective(500px) translate3d(0, 0, 0);
+  }
+`;
+
 const floating = keyframes`
   0% {
     transform: rotate(0deg) translate(-10px) rotate(0deg);
@@ -64,6 +75,7 @@ export const AboutPageContainer = styled.div`
     width: 45%;
     height: 100%;
     animation: 10s linear ${floating} infinite;
+    user-select: none;
     z-index: 1;
   }
 
@@ -71,6 +83,7 @@ export const AboutPageContainer = styled.div`
     max-height: 500px;
     margin: auto;
     animation: 10s linear ${floating} infinite;
+    user-select: none;
     z-index: 1;
   }
 
@@ -100,7 +113,16 @@ export const StyledP = styled.p`
   font-size: 20px;
   line-height: 27px;
   letter-spacing: 1px;
+  text-align: justify;
+  opacity: ${(props) => (props.$isInViewport ? 1 : 0)};
   z-index: 1;
+`;
+
+export const Word = styled.span`
+  display: inline-block;
+  opacity: 0;
+  animation: 1.5s forwards ${(props) => props.$index * 10 + 500}ms
+    ${(props) => props.$isInViewport && summaryTextAnimation};
 `;
 
 export const SkillSetContainer = styled.div`
@@ -109,6 +131,7 @@ export const SkillSetContainer = styled.div`
   width: 50%;
   margin: 50px auto 10px 0;
   border-top: 1px solid #ffaa2a;
+  user-select: none;
 `;
 
 export const ImageLayer = styled.img.attrs((props) => ({

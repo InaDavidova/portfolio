@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import useElementOnScreen from "../../../utils/useElementOnScreen";
 import {
   AboutPageContainer,
@@ -6,6 +6,7 @@ import {
   ImageLayer,
   SkillSetContainer,
   StyledP,
+  Word,
 } from "./AboutPage.styled";
 import inaImg from "../../../images/ina2.png";
 import htmlImg from "../../../images/technologies/html.png";
@@ -51,23 +52,6 @@ function AboutPage() {
     "My love for coconut is no joke - I'm like a coconut detective, sniffing out coconut-flavored everything wherever I go!",
   ]);
 
-  const [displayedText, setDisplayedText] = useState("");
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (!isPVisible) {
-      return;
-    }
-
-    if (index < summaryText.length) {
-      const timeoutId = setTimeout(() => {
-        setDisplayedText(displayedText + " " + summaryText[index]);
-        setIndex(index + 1);
-      }, 50);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [index, summaryText, displayedText, isPVisible]);
-
   const getImageCordinates = (speed) => {
     const x = (widowWidth - mouseCordinates.x * speed) / 100;
     const y = (widowHeight - mouseCordinates.y * speed) / 100;
@@ -82,7 +66,17 @@ function AboutPage() {
     >
       <AnimatedTitle text={["About", "Me"]} />
       <img src={inaImg} alt="Portrait" className="floating" />
-      <StyledP ref={pRef}>{displayedText || " "}</StyledP>
+      <StyledP ref={pRef} $isInViewport={isPVisible}>
+        {summaryText.map((el, i) => (
+          <Fragment key={i}>
+            {el && (
+              <Word $index={i} $isInViewport={isPVisible}>
+                {el}
+              </Word>
+            )}{" "}
+          </Fragment>
+        ))}
+      </StyledP>
 
       <SkillSetContainer>
         <ImageLayer
