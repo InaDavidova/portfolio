@@ -9,7 +9,7 @@ function AnimatedTitle({ text }) {
   });
 
   return (
-    <StyledH1 ref={elementRef} $isVisible={isVisible}>
+    <StyledH1 ref={elementRef} $isVisible={isVisible} $text={text}>
       <span>{text[0]}</span> <span>{text[1]}</span>
     </StyledH1>
   );

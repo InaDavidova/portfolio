@@ -35,15 +35,15 @@ const lineAnimationRightLine = keyframes`
 
 const leftWordAnimation = keyframes`
   0% {
-    right: 100%;
+    right: 100vw;
   }
   50%{
-    right: 50%;
+    right:0;
     color: #b7fae6;
     text-shadow: 0 0 5px #b7fae6;
   }
   100% {
-    right: 50%;
+    right: 0;
     color: #ff9900;
     text-shadow: none;
   }
@@ -51,15 +51,15 @@ const leftWordAnimation = keyframes`
 
 const rightWordAnimation = keyframes`
   0% {
-    left: 100%;
+    left: 100vw;
   }
   50%{
-    left: 50%;
+    left: 0;
     color: #b7fae6;
     text-shadow: 0 0 5px #b7fae6;
   }
   100% {
-    left: 50%;
+    left: 0;
     color: #ff9900;
     text-shadow: 0 0 5px none;
   }
@@ -70,24 +70,37 @@ export const StyledH1 = styled.h1`
   width: 100%;
   height: 80px;
   margin-top: 5px;
-  color: #ff9900;
+  padding-top: 40px;
+  color: transparent;
+  text-align: center;
   z-index: 1;
 
   & span:nth-of-type(1) {
-    position: absolute;
-    top: 40px;
-    right: 100%;
-    margin-right: 10px;
-    animation: 1s forwards 0s
-      ${(props) => (props.$isVisible ? leftWordAnimation : "")};
+    position: relative;
+
+    &:before {
+      content: "${(props) => props.$text[0]}";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 100vw;
+      animation: 1s forwards 0s
+        ${(props) => (props.$isVisible ? leftWordAnimation : "")};
+    }
   }
 
   & span:nth-of-type(2) {
-    position: absolute;
-    top: 40px;
-    left: 100%;
-    animation: 1s forwards 0s
-      ${(props) => (props.$isVisible ? rightWordAnimation : "")};
+    position: relative;
+
+    &:before {
+      content: "${(props) => props.$text[1]}";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 100vw;
+      animation: 1s forwards 0s
+        ${(props) => (props.$isVisible ? rightWordAnimation : "")};
+    }
   }
 
   &:before {
