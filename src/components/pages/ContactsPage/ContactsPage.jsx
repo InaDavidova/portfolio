@@ -7,12 +7,16 @@ import {
   ContactsPageContainer,
   EmailInput,
   ErrorMessage,
+  FindMeP,
   MessageTextarea,
   NameInput,
   NotificationMessage,
   SendButton,
+  StyledA,
   StyledForm,
 } from "./ContactsPage.styled";
+import LinkedinIcon from "../../svgs/LinkedinIcon";
+import GithubIcon from "../../svgs/GithubIcon";
 const SERVICE_ID = "service_xaz4bqn";
 const TEMPLATE_ID = "template_j4rx75v";
 const PUBLIC_KEY = "vivlE7CLGyjKHeY66";
@@ -32,6 +36,32 @@ function ContactsPage() {
     rootMargin: "0px",
     threshold: 0.3,
   });
+
+  useEffect(() => {
+    if (!isFormVisible) {
+      setEmailErrorMessage("");
+    }
+  }, [isFormVisible]);
+
+  useEffect(() => {
+    if (!notificationMessage.message) {
+      return;
+    }
+    setTimeout(() => {
+      setNotificationMessage({
+        type: "",
+        message: "",
+      });
+    }, 5000);
+  }, [notificationMessage]);
+
+  useEffect(() => {
+    if (textAreaRef) {
+      textAreaRef.current.style.height = "0px";
+      const scrollHeight = textAreaRef.current.scrollHeight;
+      textAreaRef.current.style.height = scrollHeight + 1 + "px";
+    }
+  }, [textAreaRef, message]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -59,26 +89,6 @@ function ContactsPage() {
       });
     }
   };
-
-  useEffect(() => {
-    if (!notificationMessage.message) {
-      return;
-    }
-    setTimeout(() => {
-      setNotificationMessage({
-        type: "",
-        message: "",
-      });
-    }, 5000);
-  }, [notificationMessage]);
-
-  useEffect(() => {
-    if (textAreaRef) {
-      textAreaRef.current.style.height = "0px";
-      const scrollHeight = textAreaRef.current.scrollHeight;
-      textAreaRef.current.style.height = scrollHeight + 1 + "px";
-    }
-  }, [textAreaRef, message]);
 
   return (
     <ContactsPageContainer id="contacts">
@@ -125,6 +135,24 @@ function ContactsPage() {
           Send
         </SendButton>
       </StyledForm>
+      <FindMeP>
+        Find me also on{" "}
+        <StyledA
+          href="https://www.linkedin.com/in/ina-davidova/"
+          target="_blank"
+          $isFormVisible={isFormVisible}
+        >
+          <LinkedinIcon />
+        </StyledA>
+        and
+        <StyledA
+          href="https://github.com/InaDavidova"
+          target="_blank"
+          $isFormVisible={isFormVisible}
+        >
+          <GithubIcon />
+        </StyledA>
+      </FindMeP>
     </ContactsPageContainer>
   );
 }

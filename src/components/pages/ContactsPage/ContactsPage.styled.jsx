@@ -50,8 +50,28 @@ const buttonBounce = keyframes`
   }
 `;
 
+const floatingRight = keyframes`
+  0% {
+    transform: rotate(0deg) translate(-3px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translate(-3px) rotate(-360deg);
+  }
+`;
+
+const floatingLeft = keyframes`
+  0% {
+    transform: rotate(0deg) translate(3px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translate(3px) rotate(-360deg);
+  }
+`;
+
 export const ContactsPageContainer = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background-color: #000417;
   overflow: hidden;
@@ -122,7 +142,7 @@ export const StyledInput = styled.input`
     border-bottom: 1px solid #b7fae6;
     -webkit-text-fill-color: #b7fae6;
     -webkit-background-clip: text;
-    clip-path: inset(2px 1px -12px 1px);
+    clip-path: inset(2px 2px -12px 2px);
     caret-color: #b7fae6;
   }
 
@@ -202,7 +222,6 @@ export const SendButton = styled.button`
 
   &:hover {
     background-color: #000417;
-    transform: translateY(-2px);
     box-shadow: 0 0 5px #ff9900;
     color: #ff9900;
   }
@@ -215,6 +234,82 @@ export const SendButton = styled.button`
 
     &:hover {
       transform: translateY(0);
+    }
+  }
+`;
+
+export const FindMeP = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: auto auto 20px auto;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  color: #ff9900;
+`;
+
+export const StyledA = styled.a`
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border-top-right-radius: 30%;
+  overflow: hidden;
+
+  & svg {
+    width: inherit;
+    height: inherit;
+
+    & .yellowParticle {
+      animation: 5s infinite 0s
+        ${(props) => (props.$isFormVisible ? floatingRight : "")} linear;
+
+      &:nth-child(2) {
+        animation-delay: 1s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 1.5s;
+      }
+
+      &:nth-child(4) {
+        animation-delay: 2s;
+      }
+    }
+
+    & .blueParticle {
+      animation: 5s infinite 0s
+        ${(props) => (props.$isFormVisible ? floatingLeft : "")} linear;
+
+      &:nth-child(2) {
+        animation-delay: 1s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 1.5s;
+      }
+
+      &:nth-child(4) {
+        animation-delay: 2s;
+      }
+    }
+  }
+
+  &:hover {
+    & .darkCirle {
+      transform-origin: 19.5% 19%;
+      transform: scale(1.6);
+    }
+
+    & .outlinePart {
+      fill: #ff9900;
+      transform-origin: 19.5% 19%;
+      transform: scale(1.4);
+    }
+
+    & .contentPart {
+      transform-origin: 19.5% 19%;
+      transform: scale(1.3);
     }
   }
 `;
