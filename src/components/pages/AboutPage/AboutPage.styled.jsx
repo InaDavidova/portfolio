@@ -75,6 +75,8 @@ export const AboutPageContainer = styled.div`
     width: 45%;
     height: 100%;
     animation: 10s linear ${floating} infinite;
+    animation-play-state: ${(props) =>
+      props.$isInViewport ? "running" : "paused"};
     user-select: none;
     z-index: 1;
   }
@@ -83,6 +85,8 @@ export const AboutPageContainer = styled.div`
     max-height: 500px;
     margin: auto;
     animation: 10s linear ${floating} infinite;
+    animation-play-state: ${(props) =>
+      props.$isInViewport ? "running" : "paused"};
     user-select: none;
     z-index: 1;
   }
@@ -103,6 +107,8 @@ export const AboutPageContainer = styled.div`
     background-size: cover;
     opacity: 0.1;
     animation: 200s linear ${moveBackground} infinite alternate;
+    animation-play-state: ${(props) =>
+      props.$isInViewport ? "running" : "paused"};
   }
 `;
 
@@ -111,7 +117,7 @@ export const StyledP = styled.p`
   margin: 100px auto auto auto;
   color: #b7fae6;
   font-size: 20px;
-  line-height: 27px;
+  line-height: 28px;
   letter-spacing: 1px;
   text-align: justify;
   opacity: ${(props) => (props.$isInViewport ? 1 : 0)};

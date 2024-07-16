@@ -13,7 +13,7 @@ export const ProjectCardsWrapper = styled.div`
   flex-wrap: ${(props) => (props.$openProject ? "" : "wrap")};
   gap: 50px;
   justify-content: center;
-  padding: 30px 20px 60px 20px;
+  padding: 60px 20px;
 `;
 
 export const ProjectInformationContainer = styled.div`

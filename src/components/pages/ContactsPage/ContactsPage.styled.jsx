@@ -1,4 +1,17 @@
 import styled, { keyframes } from "styled-components";
+import clouds from "../../../images/clouds.png";
+
+const moveBackground = keyframes`
+  0% {
+    background-position: top;
+    background-size: 300%; 
+  }
+ 
+  100% {
+    background-position: -100px 0px;
+    background-size: 250%;
+  }
+`;
 
 const messageFadeInAndOut = keyframes`
   0% {
@@ -75,6 +88,22 @@ export const ContactsPageContainer = styled.div`
   min-height: 100vh;
   background-color: #000417;
   overflow: hidden;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: no-repeat url(${clouds});
+    background-size: cover;
+    opacity: 0.1;
+    animation: 200s linear ${moveBackground} infinite alternate;
+    animation-play-state: ${(props) =>
+      props.$isFormVisible ? "running" : "paused"};
+  }
 `;
 
 export const StyledForm = styled.form`
@@ -130,6 +159,10 @@ export const StyledInput = styled.input`
   opacity: ${(props) => (props.$isFormVisible ? 1 : 0)};
   outline: none;
 
+  &:hover {
+    border-color: #ff9900;
+  }
+
   &:focus {
     border-color: #ff9900;
     box-shadow: 0 0 12px #b7fae6;
@@ -182,6 +215,10 @@ export const MessageTextarea = styled.textarea`
   opacity: ${(props) => (props.$isFormVisible ? 1 : 0)};
   animation: 1.5s forwards 0s
     ${(props) => (props.$isFormVisible ? textareaBounce : "")};
+
+  &:hover {
+    border-color: #ff9900;
+  }
 
   &:focus {
     border-color: #ff9900;
@@ -246,6 +283,7 @@ export const FindMeP = styled.p`
   font-size: 20px;
   letter-spacing: 0.5px;
   color: #ff9900;
+  z-index: 1;
 `;
 
 export const StyledA = styled.a`
@@ -263,6 +301,8 @@ export const StyledA = styled.a`
     & .yellowParticle {
       animation: 5s infinite 0s
         ${(props) => (props.$isFormVisible ? floatingRight : "")} linear;
+      animation-play-state: ${(props) =>
+        props.$isFormVisible ? "running" : "paused"};
 
       &:nth-child(2) {
         animation-delay: 1s;
@@ -280,7 +320,9 @@ export const StyledA = styled.a`
     & .blueParticle {
       animation: 5s infinite 0s
         ${(props) => (props.$isFormVisible ? floatingLeft : "")} linear;
-
+      animation-play-state: ${(props) =>
+        props.$isFormVisible ? "running" : "paused"};
+        
       &:nth-child(2) {
         animation-delay: 1s;
       }

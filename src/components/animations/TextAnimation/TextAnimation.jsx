@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { StyledCanvas } from "./TextAnimation.styled";
 import { debounce } from "../../../utils/debounce";
 
+import useElementOnScreen from "../../../utils/useElementOnScreen";
+
 class TextParticle {
   constructor(effect, x, y, color) {
     this.effect = effect;
-    this.x = Math.random() * this.effect.canvasWidth;
-    this.y = Math.random() * this.effect.canvasHeight;
+    this.x = Math.floor(Math.random() * this.effect.canvasWidth);
+    this.y = Math.floor(Math.random() * this.effect.canvasHeight);
     this.originX = x;
     this.originY = y;
     this.color = color;
@@ -123,8 +125,25 @@ class TextEffect {
 }
 
 function TextAnimation() {
-  const canvasRef = useRef(null);
+  const [canvasRef, isVisible] = useElementOnScreen({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0,
+  });
   const [text] = useState("Software Engineer");
+  const isVisibleRef = useRef({ isVisible, animationFinished: false });
+
+  useEffect(() => {
+    isVisibleRef.current.isVisible = isVisible;
+
+    if (!isVisible) {
+      setTimeout(() => {
+        isVisibleRef.current.animationFinished = true;
+      }, 17000);
+    } else {
+      isVisibleRef.current.animationFinished = false;
+    }
+  }, [isVisible]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -144,8 +163,11 @@ function TextAnimation() {
       textEffect.wrapText();
 
       function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        textEffect.render();
+        if (isVisibleRef.current.isVisible || !isVisibleRef.current.animationFinished) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          textEffect.render();
+          console.log("drawing");
+        }
         animationFrameId = window.requestAnimationFrame(animate);
       }
       animate();

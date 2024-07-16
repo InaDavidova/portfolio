@@ -91,7 +91,7 @@ function ContactsPage() {
   };
 
   return (
-    <ContactsPageContainer id="contacts">
+    <ContactsPageContainer id="contacts" $isFormVisible={isFormVisible}>
       <AnimatedTitle text={["Contact", "Me"]} />
       <StyledForm ref={formRef} onSubmit={handleFormSubmit}>
         <NotificationMessage $type={notificationMessage.type}>

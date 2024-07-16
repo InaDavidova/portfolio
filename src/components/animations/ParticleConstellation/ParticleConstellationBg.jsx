@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { StyledCanvas } from "./ParticleConstellationBg.styled";
 import { debounce } from "../../../utils/debounce";
 import useElementOnScreen from "../../../utils/useElementOnScreen";
@@ -6,8 +6,8 @@ import useElementOnScreen from "../../../utils/useElementOnScreen";
 class Particle {
   constructor(effect) {
     this.effect = effect;
-    this.x = Math.random() * this.effect.width;
-    this.y = Math.random() * this.effect.height;
+    this.x = Math.floor(Math.random() * this.effect.width);
+    this.y = Math.floor(Math.random() * this.effect.height);
     this.radius = Math.random() + 1 * 1.2;
     this.vx = (Math.random() - 0.5) / 2;
     this.vy = (Math.random() - 0.5) / 2;
@@ -85,12 +85,17 @@ class Effect {
 function ParticleConstellationBg() {
   const [canvasRef, isVisible] = useElementOnScreen({
     root: null,
-    rootMargin: "100px",
+    rootMargin: "0px",
     threshold: 0,
   });
+  const isVisibleRef = useRef({ isVisible });
 
   useEffect(() => {
-    if (!canvasRef || !isVisible) {
+    isVisibleRef.current.isVisible = isVisible;
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!canvasRef) {
       return;
     }
     const canvas = canvasRef.current;
@@ -105,8 +110,10 @@ function ParticleConstellationBg() {
     let effect = new Effect(canvas);
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      effect.handleParticles(ctx);
+      if ( isVisibleRef.current.isVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        effect.handleParticles(ctx);
+      }
       animationFrameId = window.requestAnimationFrame(animate);
     }
     animate();
@@ -129,7 +136,7 @@ function ParticleConstellationBg() {
       window.cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
     };
-  }, [canvasRef, isVisible]);
+  }, [canvasRef]);
 
   return <StyledCanvas ref={canvasRef} />;
 }
