@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ProjectCard from "../../ProjectCard/ProjectCard";
 import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
 import {
@@ -32,6 +32,7 @@ function ProjectsPage() {
     "portfolio",
   ]);
   const [activeImageNumber, setActiveImageNumber] = useState(0);
+  const carouselRef = useRef();
 
   const projectData = useMemo(() => {
     if (!openProject) {
@@ -47,6 +48,17 @@ function ProjectsPage() {
     }
     return projectData.images.length;
   }, [projectData, openProject]);
+
+  useEffect(() => {
+    if (carouselRef && openProject) {
+      setTimeout(() => {
+        carouselRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }, 400);
+    }
+  }, [openProject, carouselRef]);
 
   return (
     <ProjectsPageContainer id="projects">
@@ -66,7 +78,7 @@ function ProjectsPage() {
           <CloseButton onClick={() => setOpenProject("")}>
             {"\u2716"}
           </CloseButton>
-          <CarouselWrapper>
+          <CarouselWrapper ref={carouselRef}>
             {projectData.images.map((img, index) => (
               <CarouselImage
                 key={index}

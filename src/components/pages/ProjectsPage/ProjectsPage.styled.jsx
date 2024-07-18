@@ -53,7 +53,6 @@ export const CarouselImage = styled.img`
       ? "100%"
       : "0%"};
   object-fit: contain;
-  /* aspect-ratio: 9 / 7; */
   border-radius: 5px;
   border: none;
   opacity: ${(props) =>
