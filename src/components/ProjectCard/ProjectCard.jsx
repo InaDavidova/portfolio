@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CardWrapper, StyledButton, StyledCard } from "./ProjectCard.styled";
 
-function ProjectCard({ project, openProject, setOpenProject }) {
+function ProjectCard({ project, openProject, setOpenProject, isVisible, index }) {
   const [cordinates, setCordinates] = useState({
     rx: 0,
     ry: 0,
@@ -19,6 +19,12 @@ function ProjectCard({ project, openProject, setOpenProject }) {
       setCardWidth(390);
       setCardHeight(260);
     }
+    setCordinates({
+      rx: 0,
+      ry: 0,
+      bx: 25,
+      by: 80,
+    })
   }, [openProject]);
 
   return (
@@ -31,6 +37,8 @@ function ProjectCard({ project, openProject, setOpenProject }) {
         $width={cardWidth}
         $project={project}
         $openProject={openProject}
+        $isVisible={isVisible}
+        $index={index}
         onClick={() => {
           if (openProject && openProject !== project) {
             setOpenProject(project);
@@ -40,8 +48,8 @@ function ProjectCard({ project, openProject, setOpenProject }) {
           if (e.target.localName === "button") {
             return;
           }
-          const x = -(e.nativeEvent.offsetX - cardWidth / 2) / 3 / 10;
-          const y = (e.nativeEvent.offsetY - cardHeight / 2) / 3 / 10;
+          const x = -(e.nativeEvent.offsetX - cardWidth / 2) / 3 / 8;
+          const y = (e.nativeEvent.offsetY - cardHeight / 2) / 3 / 8;
           setCordinates({
             rx: y.toFixed(2),
             ry: x.toFixed(2),

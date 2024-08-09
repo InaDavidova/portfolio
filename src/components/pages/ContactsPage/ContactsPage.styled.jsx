@@ -32,7 +32,8 @@ const messageFadeInAndOut = keyframes`
 
 const nameInputBounce = keyframes`
   0% {
-    transform: translateY(-200px); opacity: 0;
+    transform: translateY(-200px); 
+    opacity: 0;
   }
 `;
 
@@ -41,7 +42,8 @@ const emailInputBounce = keyframes`
     opacity: 0;
   }
   40% {
-    transform: translateY(-100px); opacity: 0;
+    transform: translateY(-100px); 
+    opacity: 0;
   }
 `;
 
@@ -50,7 +52,8 @@ const textareaBounce = keyframes`
     opacity: 0;
   }
   60% {
-    transform: translateY(-80px); opacity: 0;
+    transform: translateY(-80px); 
+    opacity: 0;
   }
 `;
 
@@ -59,7 +62,8 @@ const buttonBounce = keyframes`
     opacity: 0;
   }
   80% {
-    transform: translateY(-50px); opacity: 0;
+    transform: translateY(-50px); 
+    opacity: 0;
   }
 `;
 
@@ -113,7 +117,7 @@ export const StyledForm = styled.form`
   gap: 20px;
   width: 40%;
   max-width: 700px;
-  margin: 50px auto 30px auto;
+  margin: auto auto 30px auto;
 `;
 
 export const NotificationMessage = styled.p`
