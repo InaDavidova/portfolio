@@ -14,14 +14,16 @@ const useElementOnScreen = (options) => {
   };
 
   useEffect(() => {
+    let refValue;
     const observer = new IntersectionObserver(callbackFunc, options);
     if (elementRef.current) {
       observer.observe(elementRef.current);
+      refValue = elementRef.current;
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (refValue) {
+        observer.unobserve(refValue);
       }
     };
   }, [elementRef, options]);
