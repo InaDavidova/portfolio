@@ -121,7 +121,7 @@ export const StyledLink = styled(Link)`
     }
 
     &::after {
-      content: "${(props) => props.$title}";
+      content: "${(props) => props.$isOpen && props.$title}";
       position: absolute;
       top: ${(props) => (props.$linkNumber === 4 ? "20px" : "10px")};
       left: ${(props) => (props.$linkNumber === 4 ? "30px" : "33px")};

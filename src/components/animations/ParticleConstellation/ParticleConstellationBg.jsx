@@ -89,7 +89,7 @@ function ParticleConstellationBg() {
     threshold: 0,
   });
   const isVisibleRef = useRef({ isVisible });
-
+console.log("update");
   useEffect(() => {
     isVisibleRef.current.isVisible = isVisible;
   }, [isVisible]);
