@@ -1,5 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { data } from "../../utils/data";
+
+const cardBounce = keyframes`
+  0% {
+    transform: translateY(-100px); 
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const CardWrapper = styled.div`
   width: fit-content;
@@ -18,10 +28,11 @@ export const StyledCard = styled.div.attrs((props) => ({
   },
 }))`
   position: relative;
-  background: no-repeat url(${(props) => (data[props.$project]?.thumbnail)});
+  background: no-repeat url(${(props) => data[props.$project]?.thumbnail});
   background-size: cover;
   transform-style: preserve-3d;
   border-radius: 5px;
+  opacity: 0;
   box-shadow: ${(props) =>
     props.$project === props.$openProject
       ? "0 0 10px #ff9900"
@@ -30,7 +41,10 @@ export const StyledCard = styled.div.attrs((props) => ({
     props.$openProject && props.$project !== props.$openProject
       ? "pointer"
       : ""};
-  transition: width 1s, height 1s;
+  animation: 1.5s forwards ${(props) => props.$index * 250}ms
+    ${(props) => (props.$isVisible ? cardBounce : "")};
+  transition: ${(props) =>
+    props.$openProject ? "width 1s, height 0s" : "width 0s, height 1s"};
 
   &:hover {
     box-shadow: ${(props) =>

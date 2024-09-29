@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import useElementOnScreen from "../../../utils/useElementOnScreen";
 import ProjectCard from "../../ProjectCard/ProjectCard";
 import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
 import {
@@ -32,7 +33,13 @@ function ProjectsPage() {
     "portfolio",
   ]);
   const [activeImageNumber, setActiveImageNumber] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const carouselRef = useRef();
+  const [projectCardsWrapperRef, isVisible] = useElementOnScreen({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  });
 
   const projectData = useMemo(() => {
     if (!openProject) {
@@ -40,6 +47,10 @@ function ProjectsPage() {
     }
     setActiveImageNumber(0);
     return data[openProject];
+  }, [openProject]);
+
+  useEffect(() => {
+    setImageLoaded(false);
   }, [openProject]);
 
   const numberOfImages = useMemo(() => {
@@ -50,26 +61,26 @@ function ProjectsPage() {
   }, [projectData, openProject]);
 
   useEffect(() => {
-    if (carouselRef && openProject) {
-      setTimeout(() => {
-        carouselRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "end",
-        });
-      }, 400);
+    if (carouselRef && openProject && imageLoaded) {
+      carouselRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     }
-  }, [openProject, carouselRef]);
+  }, [openProject, carouselRef, imageLoaded]);
 
   return (
     <ProjectsPageContainer id="projects">
       <AnimatedTitle text={["My", "Projects"]} />
-      <ProjectCardsWrapper $openProject={openProject}>
+      <ProjectCardsWrapper $openProject={openProject} ref={projectCardsWrapperRef}>
         {projects.map((project, index) => (
           <ProjectCard
             key={index}
             project={project}
             openProject={openProject}
             setOpenProject={setOpenProject}
+            isVisible={isVisible}
+            index={index}
           />
         ))}
       </ProjectCardsWrapper>
@@ -86,6 +97,7 @@ function ProjectsPage() {
                 $index={index}
                 $activeImageNumber={activeImageNumber}
                 $numberOfImages={numberOfImages}
+                onLoad={() => setImageLoaded(true)}
               />
             ))}
             {numberOfImages > 1 && (

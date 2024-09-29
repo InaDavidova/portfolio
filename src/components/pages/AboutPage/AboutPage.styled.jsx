@@ -83,6 +83,8 @@ export const AboutPageContainer = styled.div`
 
   & img.subTitle {
     max-height: 500px;
+    width: 50%;
+    object-fit: contain;
     margin: auto;
     animation: 10s linear ${floating} infinite;
     animation-play-state: ${(props) =>
