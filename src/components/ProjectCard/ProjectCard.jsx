@@ -1,30 +1,36 @@
 import { useEffect, useState } from "react";
 import { CardWrapper, StyledButton, StyledCard } from "./ProjectCard.styled";
 
-function ProjectCard({ project, openProject, setOpenProject, isVisible, index }) {
-  const [cordinates, setCordinates] = useState({
-    rx: 0,
-    ry: 0,
-    bx: 25,
-    by: 80,
-  });
-  const [cardWidth, setCardWidth] = useState(390);
-  const [cardHeight, setCardHeight] = useState(260);
+function ProjectCard({
+  project,
+  openProject,
+  setOpenProject,
+  isVisible,
+  index,
+}) {
+  const [cordinates, setCordinates] = useState({});
+  const [cardWidth, setCardWidth] = useState(0);
+  const [cardHeight, setCardHeight] = useState(0);
 
   useEffect(() => {
+    const screnWidth = window.innerWidth;
     if (openProject) {
-      setCardWidth(210);
-      setCardHeight(140);
+      let width = screnWidth >= 2560 ? 250 : 210;
+      let height = (width / 3) * 2;
+      setCardWidth(width);
+      setCardHeight(height);
     } else {
-      setCardWidth(390);
-      setCardHeight(260);
+      let width = screnWidth / 4;
+      if (width < 360) width = 360;
+      setCardWidth(width);
+      setCardHeight((width / 3) * 2);
     }
     setCordinates({
       rx: 0,
       ry: 0,
       bx: 25,
       by: 80,
-    })
+    });
   }, [openProject]);
 
   return (
