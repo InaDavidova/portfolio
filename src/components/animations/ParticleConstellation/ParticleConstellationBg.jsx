@@ -89,7 +89,7 @@ function ParticleConstellationBg() {
     threshold: 0,
   });
   const isVisibleRef = useRef({ isVisible });
-console.log("update");
+
   useEffect(() => {
     isVisibleRef.current.isVisible = isVisible;
   }, [isVisible]);
@@ -106,11 +106,13 @@ console.log("update");
     ctx.canvas.width = window.innerWidth;
     let animationFrameId;
     let isFirstRender = true;
+    let prevHeight = window.innerHeight;
+    let prevWidth = window.innerWidth;
 
     let effect = new Effect(canvas);
 
     function animate() {
-      if ( isVisibleRef.current.isVisible) {
+      if (isVisibleRef.current.isVisible) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         effect.handleParticles(ctx);
       }
@@ -120,9 +122,19 @@ console.log("update");
 
     const handleResize = debounce(() => {
       if (!isFirstRender) {
+        let newHeight = window.innerHeight;
+        let newWidth = window.innerWidth;
+        if (
+          Math.abs(newHeight - prevHeight) < 150 &&
+          Math.abs(newWidth - prevWidth) < 150
+        ) {
+          return;
+        }
         window.cancelAnimationFrame(animationFrameId);
-        ctx.canvas.height = window.innerHeight;
-        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = newHeight;
+        ctx.canvas.width = newWidth;
+        prevHeight = newHeight;
+        prevWidth = newWidth;
         effect = new Effect(canvas);
         animate();
       }

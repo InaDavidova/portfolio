@@ -158,15 +158,19 @@ function TextAnimation() {
       ctx.canvas.width = window.innerWidth;
       let isFirstRender = true;
       let animationFrameId;
+      let prevHeight = window.innerHeight;
+      let prevWidth = window.innerWidth;
 
       let textEffect = new TextEffect(text, ctx);
       textEffect.wrapText();
 
       function animate() {
-        if (isVisibleRef.current.isVisible || !isVisibleRef.current.animationFinished) {
+        if (
+          isVisibleRef.current.isVisible ||
+          !isVisibleRef.current.animationFinished
+        ) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           textEffect.render();
-          console.log("drawing");
         }
         animationFrameId = window.requestAnimationFrame(animate);
       }
@@ -174,9 +178,19 @@ function TextAnimation() {
 
       const handleResize = debounce(() => {
         if (!isFirstRender) {
+          let newHeight = window.innerHeight;
+          let newWidth = window.innerWidth;
+          if (
+            Math.abs(newHeight - prevHeight) < 150 &&
+            Math.abs(newWidth - prevWidth) < 150
+          ) {
+            return;
+          }
           window.cancelAnimationFrame(animationFrameId);
-          ctx.canvas.height = window.innerHeight;
-          ctx.canvas.width = window.innerWidth;
+          ctx.canvas.height = newHeight;
+          ctx.canvas.width = newWidth;
+          prevHeight = newHeight;
+          prevWidth = newWidth;
           textEffect = new TextEffect(text, ctx);
           textEffect.wrapText();
 
