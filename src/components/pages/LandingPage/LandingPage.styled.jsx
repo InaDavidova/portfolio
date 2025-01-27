@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { device } from "../../../theme";
 
 const lineAnimation = keyframes`
   0% {
@@ -99,11 +100,29 @@ export const TitleContainer = styled.div`
 export const StyledImage = styled.img`
   position: absolute;
   bottom: 0;
-  right: 6%;
-  height: 90vh;
+  right: 5%;
+  height: 85vh;
   transform: translateY(100%);
   animation: 1.5s forwards 3s ${imageSlideUpAnimation};
   user-select: none;
+
+  @media ${device.laptopL} {
+    right: 3%;
+    height: 80vh;
+  }
+
+  @media ${device.laptop} {
+    right: 0;
+    height: 75vh;
+  }
+
+  @media ${device.tablet} {
+    right: -12%;
+  }
+
+  @media ${device.mobileL} {
+    display: none;
+  }
 `;
 
 export const LandingPageContainer = styled.div`

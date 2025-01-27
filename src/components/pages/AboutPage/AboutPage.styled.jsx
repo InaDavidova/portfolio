@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import clouds from "../../../images/clouds.png";
+import { device } from "../../../theme";
 
 const moveBackground = keyframes`
   0% {
@@ -114,16 +115,65 @@ export const AboutPageContainer = styled.div`
   }
 `;
 
+export const SummaryWrapper = styled.div`
+  display: flex;
+
+  & img.floating {
+    height: fit-content;
+  }
+
+  @media ${device.laptop} {
+    display: block;
+    margin-top: 30px;
+
+    & img.floating {
+      float: left;
+    }
+  }
+
+  @media ${device.mobileL} {
+    & img.floating {
+      width: 50%;
+    }
+  }
+`;
+
 export const StyledP = styled.p`
-  width: 40%;
-  margin: 100px auto auto auto;
+  width: 50%;
+  margin: auto;
+  padding-top: 30px;
   color: #b7fae6;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 2.1em;
+  line-height: 1.6em;
   letter-spacing: 1px;
   text-align: justify;
   opacity: ${(props) => (props.$isInViewport ? 1 : 0)};
   z-index: 1;
+
+  @media ${device.laptopL} {
+    width: 40%;
+    margin-top: 3%;
+    font-size: 1.4em;
+    line-height: 1.4em;
+  }
+
+  @media ${device.laptop} {
+    width: unset;
+    padding: 0 40px;
+    font-size: 1.3em;
+    line-height: 1.3em;
+  }
+
+  @media ${device.tablet} {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    letter-spacing: 0;
+  }
+
+  @media ${device.mobileL} {
+    padding: 0 20px;
+    font-size: 1.1em;
+  }
 `;
 
 export const Word = styled.span`

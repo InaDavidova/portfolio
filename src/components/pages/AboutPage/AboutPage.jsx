@@ -6,6 +6,7 @@ import {
   ImageLayer,
   SkillSetContainer,
   StyledP,
+  SummaryWrapper,
   Word,
 } from "./AboutPage.styled";
 import inaImg from "../../../images/ina2.png";
@@ -72,18 +73,20 @@ function AboutPage() {
       $isInViewport={isAboutPageVisible}
     >
       <AnimatedTitle text={["About", "Me"]} />
-      <img src={inaImg} alt="Portrait" className="floating" />
-      <StyledP ref={pRef} $isInViewport={isPVisible}>
-        {summaryText.map((el, i) => (
-          <Fragment key={i}>
-            {el && (
-              <Word $index={i} $isInViewport={isPVisible}>
-                {el}
-              </Word>
-            )}{" "}
-          </Fragment>
-        ))}
-      </StyledP>
+      <SummaryWrapper>
+        <img src={inaImg} alt="Portrait" className="floating" />
+        <StyledP ref={pRef} $isInViewport={isPVisible}>
+          {summaryText.map((el, i) => (
+            <Fragment key={i}>
+              {el && (
+                <Word $index={i} $isInViewport={isPVisible}>
+                  {el}
+                </Word>
+              )}{" "}
+            </Fragment>
+          ))}
+        </StyledP>
+      </SummaryWrapper>
 
       <SkillSetContainer>
         <ImageLayer

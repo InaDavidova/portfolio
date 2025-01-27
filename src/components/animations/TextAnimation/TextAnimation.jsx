@@ -3,6 +3,7 @@ import { StyledCanvas } from "./TextAnimation.styled";
 import { debounce } from "../../../utils/debounce";
 
 import useElementOnScreen from "../../../utils/useElementOnScreen";
+import { size } from "../../../theme";
 
 class TextParticle {
   constructor(effect, x, y, color) {
@@ -57,10 +58,14 @@ class TextEffect {
     this.textX = this.canvasHeight * 0.75;
     this.textY = this.canvasWidth * 0.1;
     this.fontSize =
-      this.canvasWidth > 736 ? this.canvasWidth / 16 : this.canvasWidth / 12;
+      this.canvasWidth > size.tablet
+        ? this.canvasWidth / 16
+        : this.canvasWidth > size.mobileL
+        ? this.canvasWidth / 10
+        : this.canvasWidth / 7;
     this.particles = [];
     this.lastParticleColor = "";
-    this.gap = this.canvasWidth > 1440 ? 3 : 1;
+    this.gap = this.canvasWidth > size.laptopL ? 2 : 1;
     this.mouse = {
       radius: 1000,
       x: 0,

@@ -15,6 +15,7 @@ function LandingPage() {
   return (
     <LandingPageContainer id="home">
       <ParticleConstellationBg />
+      <StyledImage src={inaImage} alt="Photograph of Ina" />
       <TextAnimation />
       <TitleContainer>
         <h1>
@@ -42,7 +43,6 @@ function LandingPage() {
           ))}
         </h2>
       </TitleContainer>
-      <StyledImage src={inaImage} alt="Photograph of Ina" />
     </LandingPageContainer>
   );
 }
