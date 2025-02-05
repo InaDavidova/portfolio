@@ -3,8 +3,10 @@ import useElementOnScreen from "../../../utils/useElementOnScreen";
 import {
   AboutPageContainer,
   FunFactsContainer,
+  FunFactsWrapper,
   ImageLayer,
   SkillSetContainer,
+  SkillsWrapper,
   StyledP,
   SummaryWrapper,
   Word,
@@ -88,75 +90,80 @@ function AboutPage() {
         </StyledP>
       </SummaryWrapper>
 
-      <SkillSetContainer>
-        <ImageLayer
-          src={jsImg}
-          alt="JavaScrips icon"
-          $cordinates={getImageCordinates(-0.6)}
-        />
-        <ImageLayer
-          src={htmlImg}
-          alt="HTML icon"
-          $cordinates={getImageCordinates(1)}
-        />
-        <ImageLayer
-          src={cssImg}
-          alt="SCC icon"
-          $cordinates={getImageCordinates(0.6)}
-        />
-        <ImageLayer
-          src={vtkImg}
-          alt="VtkJS icon"
-          $cordinates={getImageCordinates(-0.6)}
-        />
-        <ImageLayer
-          src={mysqlImg}
-          alt="MySQL icon"
-          $cordinates={getImageCordinates(0.6)}
-        />
-        <ImageLayer
-          src={mongodbImg}
-          alt="MongoDB icon"
-          $cordinates={getImageCordinates(0.7)}
-        />
-        <ImageLayer
-          src={nodeImg}
-          alt="NodeJS icon"
-          $cordinates={getImageCordinates(0.5)}
-        />
-        <ImageLayer
-          src={expressImg}
-          alt="ExpressJS icon"
-          $cordinates={getImageCordinates(-0.8)}
-        />
-        <ImageLayer
-          src={reactImg}
-          alt="ReactJS icon"
-          $cordinates={getImageCordinates(2)}
-        />
-        <ImageLayer
-          src={tsImg}
-          alt="TypeScript icon"
-          $cordinates={getImageCordinates(-0.5)}
-        />
-        <ImageLayer
-          src={angularImg}
-          alt="AngularJS icon"
-          $cordinates={getImageCordinates(0.5)}
-        />
-        <ImageLayer
-          src={jestImg}
-          alt="Jest icon"
-          $cordinates={getImageCordinates(0.8)}
-        />
-      </SkillSetContainer>
-      <img src={brainImg} alt="Title text" className="subTitle" />
-      <img src={funFactsImg} alt="Title text" className="subTitle" />
-      <FunFactsContainer ref={ulRef} $isInViewport={isUlVisible}>
-        {funFacts.map((text, i) => (
-          <li key={i}>{text}</li>
-        ))}
-      </FunFactsContainer>
+      <SkillsWrapper>
+        <img src={brainImg} alt="Title text" className="subTitle" />
+        <SkillSetContainer>
+          <ImageLayer
+            src={jsImg}
+            alt="JavaScrips icon"
+            $cordinates={getImageCordinates(-0.6)}
+          />
+          <ImageLayer
+            src={htmlImg}
+            alt="HTML icon"
+            $cordinates={getImageCordinates(1)}
+          />
+          <ImageLayer
+            src={cssImg}
+            alt="SCC icon"
+            $cordinates={getImageCordinates(0.6)}
+          />
+          <ImageLayer
+            src={vtkImg}
+            alt="VtkJS icon"
+            $cordinates={getImageCordinates(-0.6)}
+          />
+          <ImageLayer
+            src={mysqlImg}
+            alt="MySQL icon"
+            $cordinates={getImageCordinates(0.6)}
+          />
+          <ImageLayer
+            src={mongodbImg}
+            alt="MongoDB icon"
+            $cordinates={getImageCordinates(0.7)}
+          />
+          <ImageLayer
+            src={nodeImg}
+            alt="NodeJS icon"
+            $cordinates={getImageCordinates(0.5)}
+          />
+          <ImageLayer
+            src={expressImg}
+            alt="ExpressJS icon"
+            $cordinates={getImageCordinates(-0.8)}
+          />
+          <ImageLayer
+            src={reactImg}
+            alt="ReactJS icon"
+            $cordinates={getImageCordinates(2)}
+          />
+          <ImageLayer
+            src={tsImg}
+            alt="TypeScript icon"
+            $cordinates={getImageCordinates(-0.5)}
+          />
+          <ImageLayer
+            src={angularImg}
+            alt="AngularJS icon"
+            $cordinates={getImageCordinates(0.5)}
+          />
+          <ImageLayer
+            src={jestImg}
+            alt="Jest icon"
+            $cordinates={getImageCordinates(0.8)}
+          />
+        </SkillSetContainer>
+      </SkillsWrapper>
+
+      <FunFactsWrapper>
+        <img src={funFactsImg} alt="Title text" className="subTitle" />
+        <FunFactsContainer ref={ulRef} $isInViewport={isUlVisible}>
+          {funFacts.map((text, i) => (
+            <li key={i}>{text}</li>
+          ))}
+        </FunFactsContainer>
+      </FunFactsWrapper>
     </AboutPageContainer>
   );
 }

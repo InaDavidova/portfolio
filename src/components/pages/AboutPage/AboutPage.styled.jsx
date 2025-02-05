@@ -184,13 +184,41 @@ export const Word = styled.span`
     ${(props) => props.$isInViewport && summaryTextAnimation};
 `;
 
+export const SkillsWrapper = styled.div`
+  display: flex;
+  flex-flow: row-reverse;
+  width: 100%;
+
+  @media ${device.tablet} {
+    flex-flow: column;
+    width: 95%;
+    margin: 50px auto 0 auto;
+    border-top: 1px solid #ffaa2a;
+
+    & img {
+      width: 100%;
+    }
+  }
+`;
+
 export const SkillSetContainer = styled.div`
   position: relative;
-  height: 500px;
+  min-height: 500px;
   width: 50%;
   margin: 50px auto 10px 0;
   border-top: 1px solid #ffaa2a;
   user-select: none;
+
+  @media ${device.tablet} {
+    width: 100%;
+    min-height: 350px;
+    margin-top: -2vh;
+    border: none;
+  }
+
+  @media ${device.mobileL} {
+    min-height: 250px;
+  }
 `;
 
 export const ImageLayer = styled.img.attrs((props) => ({
@@ -207,19 +235,32 @@ export const ImageLayer = styled.img.attrs((props) => ({
   object-fit: contain;
 `;
 
+export const FunFactsWrapper = styled.div`
+  display: flex;
+
+  @media ${device.tablet} {
+    width: 95%;
+    flex-direction: column;
+    border-top: 1px solid #ffaa2a;
+    margin: 30px auto 0 auto;
+    padding-top: 30px;
+  }
+`;
+
 export const FunFactsContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  height: 500px;
+  min-height: 500px;
   width: 50%;
   margin: 50px 0 10px auto;
-  padding-right: 20px;
+  padding: 50px 20px 50px 0;
   text-align: justify;
   border-top: 1px solid #ffaa2a;
   color: #b7fae6;
   letter-spacing: 1px;
+  font-size: 2.1em;
   z-index: 1;
 
   & li {
@@ -246,5 +287,31 @@ export const FunFactsContainer = styled.ul`
 
   & li:nth-child(5) {
     animation-delay: 100ms;
+  }
+
+  @media ${device.desktop} {
+    font-size: 1.5em;
+  }
+
+  @media ${device.laptopL} {
+    font-size: 1.2em;
+  }
+
+  @media ${device.laptop} {
+    font-size: 1em;
+  }
+
+  @media ${device.tablet} {
+    width: 100%;
+    height: unset;
+    padding: 0 20px 0 30px;
+    margin: -50px 0 0 0;
+    border: none;
+    letter-spacing: 0;
+  }
+
+  @media ${device.mobileL} {
+    margin: 0 0 20px 0;
+    font-size: 0.9em;
   }
 `;
