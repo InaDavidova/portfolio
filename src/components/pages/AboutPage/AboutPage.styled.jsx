@@ -128,6 +128,7 @@ export const SummaryWrapper = styled.div`
 
     & img.floating {
       float: left;
+      height: auto;
     }
   }
 
