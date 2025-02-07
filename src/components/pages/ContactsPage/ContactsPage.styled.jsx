@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import clouds from "../../../images/clouds.png";
+import { device } from "../../../theme";
 
 const moveBackground = keyframes`
   0% {
@@ -118,6 +119,18 @@ export const StyledForm = styled.form`
   width: 40%;
   max-width: 700px;
   margin: auto auto 30px auto;
+
+  @media ${device.laptop} {
+    width: 55%;
+  }
+
+  @media ${device.tablet} {
+    width: 70%;
+  }
+
+  @media ${device.mobileL} {
+    width: 90%;
+  }
 `;
 
 export const NotificationMessage = styled.p`
@@ -326,7 +339,7 @@ export const StyledA = styled.a`
         ${(props) => (props.$isFormVisible ? floatingLeft : "")} linear;
       animation-play-state: ${(props) =>
         props.$isFormVisible ? "running" : "paused"};
-        
+
       &:nth-child(2) {
         animation-delay: 1s;
       }
