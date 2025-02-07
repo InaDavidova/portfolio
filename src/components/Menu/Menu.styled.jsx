@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
 const coordinates = {
-  1: { x: 1, y: 64 },
-  2: { x: 29, y: 51 },
-  3: { x: 51, y: 29 },
-  4: { x: 64, y: 1 },
+  1: { x: 1, y: 72 },
+  2: { x: 34, y: 59 },
+  3: { x: 59, y: 34 },
+  4: { x: 72, y: 1 },
 };
 
 const linkAnimationForward = (linkNumber) => keyframes`
@@ -40,10 +40,10 @@ export const StyledMenu = styled.div`
 
 export const StyledMenuButton = styled.button`
   position: fixed;
-  top: -42px;
-  left: -42px;
-  width: 84px;
-  height: 84px;
+  top: -57px;
+  left: -57px;
+  width: 114px;
+  height: 114px;
   border: none;
   border-radius: 50%;
   background-color: #b7fae6;
@@ -65,9 +65,9 @@ export const StyledMenuButton = styled.button`
 export const LineDiv = styled.div`
   position: absolute;
   bottom: ${(props) =>
-    props.$isOpen ? "23px" : props.$lineNumber === 1 ? "27px" : "18px"};
-  right: 16px;
-  width: 18px;
+    props.$isOpen ? "30px" : props.$lineNumber === 1 ? "34px" : "25px"};
+  right: 25px;
+  width: 20px;
   border: 2px solid #000417;
   background-color: #000417;
   border-radius: 5px;
@@ -90,8 +90,8 @@ export const StyledLink = styled(Link)`
   align-items: center;
   text-decoration: none;
   text-align: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 5px;
   background-color: #b7fae6;
   color: #000417;
