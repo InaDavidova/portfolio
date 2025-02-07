@@ -36,8 +36,8 @@ export const data = {
     thumbnail: plh1,
     images: [plh2, plh3, plh4, plh5, plh6, plh7, plh8, plh9],
     description: [
-      "This app was created as the final project for TechLabs Berlin by a dedicated team of six. I served as the responsible front-end developer.",
-      "The goal of the project was to develop a web application that helps users improve their habits and become more environmentally conscious. It targets everyone who wants to contribute to this cause by offering simple challenges. We believe that every small action can collectively lead to a significant positive impact on the future.",
+      "This app was created as the final project for TechLabs Berlin by a dedicated team of six, with me serving as the front-end developer.",
+      "The goal was to develop a web app that helps users improve their habits and become more environmentally conscious through simple challenges, empowering anyone to make a positive impact.",
     ],
     githubLink: "https://github.com/TechLabs-Berlin/st21-planets-little-helper",
   },

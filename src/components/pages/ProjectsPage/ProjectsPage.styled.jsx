@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { device } from "../../../theme";
 
 export const ProjectsPageContainer = styled.div`
   position: relative;
-  min-height: 100vh;
   background-color: #000417;
   overflow: hidden;
+  padding-bottom: 50px;
 `;
 
 export const ProjectCardsWrapper = styled.div`
@@ -21,6 +22,15 @@ export const ProjectInformationContainer = styled.div`
   display: flex;
   width: 100%;
   padding: 30px 20px;
+
+  @media ${device.laptopL} {
+    padding-top: 0;
+  }
+
+  @media ${device.tablet} {
+    flex-direction: column-reverse;
+    padding: 0 10px 20px 10px;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -45,6 +55,10 @@ export const CarouselWrapper = styled.div`
   width: 55%;
   border-radius: 5px;
   border: none;
+
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export const CarouselImage = styled.img`
@@ -122,6 +136,10 @@ export const InformationWrapper = styled.div`
   width: 45%;
   display: flex;
   flex-direction: column;
+
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export const ProjectTitle = styled.h2`
@@ -130,15 +148,39 @@ export const ProjectTitle = styled.h2`
   color: #ff9900;
   text-align: center;
   letter-spacing: 1px;
+
+  @media ${device.laptop} {
+    margin-bottom: 20px;
+  }
+
+  @media ${device.tablet} {
+    margin-bottom: 10px;
+  }
 `;
 
 export const StyledP = styled.p`
   margin: 10px 40px;
   color: white;
-  font-size: 18px;
-  line-height: 23px;
+  font-size: 1.5em;
   text-align: justify;
   letter-spacing: 1px;
+
+  @media ${device.laptopL} {
+    margin: 10px 20px;
+    font-size: 1.2em;
+    line-height: unset;
+  }
+
+  @media ${device.laptop} {
+    margin: 0 0 10px 10px;
+    font-size: 1em;
+    line-height: unset;
+  }
+
+  @media ${device.tablet} {
+    margin: 5px 20px;
+    letter-spacing: 0;
+  }
 `;
 
 export const GithubLink = styled.a`
@@ -160,5 +202,9 @@ export const GithubLink = styled.a`
     transform: scale(1.03);
     border-bottom: 1px solid #b7fae6;
     box-shadow: 0 0 8px #ff9900;
+  }
+
+  @media ${device.tablet} {
+    margin-bottom: 10px;
   }
 `;
