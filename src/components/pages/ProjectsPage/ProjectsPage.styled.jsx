@@ -13,8 +13,15 @@ export const ProjectCardsWrapper = styled.div`
   flex-direction: row;
   flex-wrap: ${(props) => (props.$openProject ? "" : "wrap")};
   gap: 50px;
-  justify-content: center;
+  justify-content: ${(props) => (props.$openProject ? "start" : "center")};
   padding: 60px 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none; /* Hides scrollbar in Chrome, Safari, Edge */
+  }
 `;
 
 export const ProjectInformationContainer = styled.div`

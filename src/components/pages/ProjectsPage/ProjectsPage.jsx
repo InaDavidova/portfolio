@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useElementOnScreen from "../../../utils/useElementOnScreen";
 import ProjectCard from "../../ProjectCard/ProjectCard";
 import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
@@ -40,6 +40,33 @@ function ProjectsPage() {
     rootMargin: "0px",
     threshold: 0.1,
   });
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleTouchStart = useCallback(
+    (e) => {
+      setIsDragging(true);
+      setStartX(e.touches[0].pageX);
+      setScrollLeft(projectCardsWrapperRef.current.scrollLeft);
+    },
+    [projectCardsWrapperRef]
+  );
+
+  const handleTouchMove = useCallback(
+    (e) => {
+      if (!isDragging) return;
+      requestAnimationFrame(() => {
+        const distance = e.touches[0].pageX - startX;
+        projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
+      });
+    },
+    [isDragging, startX, scrollLeft, projectCardsWrapperRef]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
 
   const projectData = useMemo(() => {
     if (!openProject) {
@@ -72,7 +99,13 @@ function ProjectsPage() {
   return (
     <ProjectsPageContainer id="projects">
       <AnimatedTitle text={["My", "Projects"]} />
-      <ProjectCardsWrapper $openProject={openProject} ref={projectCardsWrapperRef}>
+      <ProjectCardsWrapper
+        $openProject={openProject}
+        ref={projectCardsWrapperRef}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {projects.map((project, index) => (
           <ProjectCard
             key={index}
@@ -130,8 +163,8 @@ function ProjectsPage() {
           </CarouselWrapper>
           <InformationWrapper>
             <ProjectTitle>{projectData.title}</ProjectTitle>
-            {projectData.description.map((el) => (
-              <StyledP>{el}</StyledP>
+            {projectData.description.map((el, i) => (
+              <StyledP key={i}>{el}</StyledP>
             ))}
             <GithubLink href={projectData.githubLink} target="_blank">
               Link to Github <img src={GithubIcon} alt="Github icon" />
