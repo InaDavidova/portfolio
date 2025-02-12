@@ -14,13 +14,34 @@ export const ProjectCardsWrapper = styled.div`
   flex-wrap: ${(props) => (props.$openProject ? "" : "wrap")};
   gap: 50px;
   justify-content: ${(props) => (props.$openProject ? "start" : "center")};
-  padding: 60px 20px;
+  padding: ${(props) =>
+    props.$openProject ? "50px 20px 20px 20px" : "60px 20px"};
+  margin-bottom: ${(props) => (props.$openProject ? "30px " : "0")};
   overflow-y: auto;
-  scrollbar-width: none;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-    display: none; /* Hides scrollbar in Chrome, Safari, Edge */
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+    border: 1px solid #b7fae6;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #ff9900;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    border-color: #ff9900;
   }
 `;
 

@@ -44,29 +44,44 @@ function ProjectsPage() {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleTouchStart = useCallback(
+  const handleDragStart = useCallback(
     (e) => {
       setIsDragging(true);
-      setStartX(e.touches[0].pageX);
+      const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+      setStartX(pageX);
       setScrollLeft(projectCardsWrapperRef.current.scrollLeft);
     },
     [projectCardsWrapperRef]
   );
 
-  const handleTouchMove = useCallback(
+  const handleDragMove = useCallback(
     (e) => {
       if (!isDragging) return;
+      const speedFactor = 2;
+
       requestAnimationFrame(() => {
-        const distance = e.touches[0].pageX - startX;
+        const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+        const distance = (pageX  - startX) * speedFactor;
         projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
       });
     },
     [isDragging, startX, scrollLeft, projectCardsWrapperRef]
   );
 
-  const handleTouchEnd = useCallback(() => {
+  const handleDragEnd = useCallback(() => {
     setIsDragging(false);
   }, []);
+
+  const handleWheel = useCallback(
+    (e) => {
+      e.preventDefault();
+      const speedFactor = 3;
+      if (e.deltaY) {
+        projectCardsWrapperRef.current.scrollLeft += e.deltaY * speedFactor;
+      }
+    },
+    [projectCardsWrapperRef]
+  );
 
   const projectData = useMemo(() => {
     if (!openProject) {
@@ -96,15 +111,35 @@ function ProjectsPage() {
     }
   }, [openProject, carouselRef, imageLoaded]);
 
+  useEffect(() => {
+    const container = projectCardsWrapperRef.current;
+    const wheelHandler = (e) => handleWheel(e);
+
+    if (openProject) {
+      container.addEventListener("wheel", wheelHandler, { passive: false });
+    } else {
+      container.removeEventListener("wheel", wheelHandler);
+    }
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      container.removeEventListener("wheel", wheelHandler);
+    };
+  }, [handleWheel, projectCardsWrapperRef, openProject]);
+
   return (
     <ProjectsPageContainer id="projects">
       <AnimatedTitle text={["My", "Projects"]} />
       <ProjectCardsWrapper
         $openProject={openProject}
         ref={projectCardsWrapperRef}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onTouchStart={handleDragStart}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
       >
         {projects.map((project, index) => (
           <ProjectCard
