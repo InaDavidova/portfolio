@@ -57,11 +57,11 @@ function ProjectsPage() {
   const handleDragMove = useCallback(
     (e) => {
       if (!isDragging) return;
-      const speedFactor = 2;
+      const speedFactor = 1;
 
       requestAnimationFrame(() => {
         const pageX = e.touches ? e.touches[0].pageX : e.pageX;
-        const distance = (pageX  - startX) * speedFactor;
+        const distance = (pageX - startX) * speedFactor;
         projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
       });
     },
