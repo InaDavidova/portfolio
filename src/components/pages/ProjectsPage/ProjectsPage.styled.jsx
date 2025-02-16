@@ -19,6 +19,7 @@ export const ProjectCardsWrapper = styled.div`
   margin-bottom: ${(props) => (props.$openProject ? "30px " : "0")};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 
   &::-webkit-scrollbar-button:start:decrement,
   &::-webkit-scrollbar-button:end:decrement {
