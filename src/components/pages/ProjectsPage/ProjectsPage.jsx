@@ -48,7 +48,7 @@ function ProjectsPage() {
     (e) => {
       setIsDragging(true);
       const pageX = e.touches ? e.touches[0].pageX : e.pageX;
-      setStartX(pageX);
+      setStartX(pageX - projectCardsWrapperRef.current.offsetLeft);
       setScrollLeft(projectCardsWrapperRef.current.scrollLeft);
     },
     [projectCardsWrapperRef]
@@ -60,7 +60,9 @@ function ProjectsPage() {
       const speedFactor = 1;
 
       requestAnimationFrame(() => {
-        const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+        const pageX =
+          (e.touches ? e.touches[0].pageX : e.pageX) -
+          projectCardsWrapperRef.current.offsetLeft;
         const distance = (pageX - startX) * speedFactor;
         projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
       });
