@@ -47,8 +47,8 @@ function ProjectsPage() {
   const handleDragStart = useCallback(
     (e) => {
       setIsDragging(true);
-      const pageX = e.touches ? e.touches[0].pageX : e.pageX;
-      setStartX(pageX - projectCardsWrapperRef.current.offsetLeft);
+      const pageX = e.pageX || e.touches[0].pageX;
+      setStartX(pageX);
       setScrollLeft(projectCardsWrapperRef.current.scrollLeft);
     },
     [projectCardsWrapperRef]
@@ -59,13 +59,11 @@ function ProjectsPage() {
       if (!isDragging) return;
       const speedFactor = 1;
 
-      requestAnimationFrame(() => {
-        const pageX =
-          (e.touches ? e.touches[0].pageX : e.pageX) -
-          projectCardsWrapperRef.current.offsetLeft;
-        const distance = (pageX - startX) * speedFactor;
-        projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
-      });
+      const pageX = e.pageX || e.touches[0].pageX;
+      const distance = (pageX - startX) * speedFactor;
+      projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
+      // requestAnimationFrame(() => {
+      // });
     },
     [isDragging, startX, scrollLeft, projectCardsWrapperRef]
   );
@@ -74,16 +72,16 @@ function ProjectsPage() {
     setIsDragging(false);
   }, []);
 
-  const handleWheel = useCallback(
-    (e) => {
-      e.preventDefault();
-      const speedFactor = 3;
-      if (e.deltaY) {
-        projectCardsWrapperRef.current.scrollLeft += e.deltaY * speedFactor;
-      }
-    },
-    [projectCardsWrapperRef]
-  );
+  // const handleWheel = useCallback(
+  //   (e) => {
+  //     e.preventDefault();
+  //     const speedFactor = 3;
+  //     if (e.deltaY) {
+  //       projectCardsWrapperRef.current.scrollLeft += e.deltaY * speedFactor;
+  //     }
+  //   },
+  //   [projectCardsWrapperRef]
+  // );
 
   const projectData = useMemo(() => {
     if (!openProject) {
@@ -113,21 +111,21 @@ function ProjectsPage() {
     }
   }, [openProject, carouselRef, imageLoaded]);
 
-  useEffect(() => {
-    const container = projectCardsWrapperRef.current;
-    const wheelHandler = (e) => handleWheel(e);
+  // useEffect(() => {
+  //   const container = projectCardsWrapperRef.current;
+  //   const wheelHandler = (e) => handleWheel(e);
 
-    if (openProject) {
-      container.addEventListener("wheel", wheelHandler, { passive: false });
-    } else {
-      container.removeEventListener("wheel", wheelHandler);
-    }
+  //   if (openProject) {
+  //     container.addEventListener("wheel", wheelHandler, { passive: false });
+  //   } else {
+  //     container.removeEventListener("wheel", wheelHandler);
+  //   }
 
-    // Cleanup event listeners on component unmount
-    return () => {
-      container.removeEventListener("wheel", wheelHandler);
-    };
-  }, [handleWheel, projectCardsWrapperRef, openProject]);
+  //   // Cleanup event listeners on component unmount
+  //   return () => {
+  //     container.removeEventListener("wheel", wheelHandler);
+  //   };
+  // }, [handleWheel, projectCardsWrapperRef, openProject]);
 
   return (
     <ProjectsPageContainer id="projects">
