@@ -20,6 +20,11 @@ export const ProjectCardsWrapper = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
+  &::-webkit-scrollbar-button:start:decrement,
+  &::-webkit-scrollbar-button:end:decrement {
+    width: 20px;
+  }
+
   &::-webkit-scrollbar {
     height: 4px;
   }
@@ -57,6 +62,10 @@ export const ProjectInformationContainer = styled.div`
   @media ${device.tablet} {
     flex-direction: column-reverse;
     padding: 0 10px 20px 10px;
+  }
+
+  @media ${device.mobileL} {
+    padding: 0 2px 20px 2px;
   }
 `;
 
@@ -117,18 +126,31 @@ export const ButtonArrow = styled.button`
     box-shadow: inset 0 0 5px #ff9900;
     transform: scale(1.05);
   }
+
+  @media ${device.mobileL} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const ButtonLeft = styled(ButtonArrow)`
   position: absolute;
   top: 50%;
   left: 10px;
+
+  @media ${device.mobileL} {
+    left: 0;
+  }
 `;
 
 export const ButtonRight = styled(ButtonArrow)`
   position: absolute;
   top: 50%;
   right: 10px;
+
+  @media ${device.mobileL} {
+    right: 0;
+  }
 `;
 
 export const DotButtonsContainer = styled.div`
@@ -142,6 +164,11 @@ export const DotButtonsContainer = styled.div`
   border-radius: 25px;
   background-color: #00041770;
   transform: translateX(-50%);
+
+  @media ${device.mobileL} {
+    bottom: 3px;
+    padding: 5px 20px;
+  }
 `;
 
 export const DotButton = styled.button`
