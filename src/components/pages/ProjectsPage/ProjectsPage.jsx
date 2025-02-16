@@ -59,11 +59,11 @@ function ProjectsPage() {
       if (!isDragging) return;
       const speedFactor = 1;
 
-      const pageX = e.touches ? e.touches[0].pageX : e.pageX;
-      const distance = (pageX - startX) * speedFactor;
-      projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
-      // requestAnimationFrame(() => {
-      // });
+      requestAnimationFrame(() => {
+        const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+        const distance = (pageX - startX) * speedFactor;
+        projectCardsWrapperRef.current.scrollLeft = scrollLeft - distance;
+      });
     },
     [isDragging, startX, scrollLeft, projectCardsWrapperRef]
   );
@@ -136,10 +136,10 @@ function ProjectsPage() {
         onTouchStart={handleDragStart}
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
-        onMouseDown={handleDragStart}
-        onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
+        // onMouseDown={handleDragStart}
+        // onMouseMove={handleDragMove}
+        // onMouseUp={handleDragEnd}
+        // onMouseLeave={handleDragEnd}
       >
         {projects.map((project, index) => (
           <ProjectCard
