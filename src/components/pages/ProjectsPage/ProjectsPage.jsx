@@ -74,7 +74,9 @@ function ProjectsPage() {
 
   const handleWheel = useCallback(
     (e) => {
-      e.preventDefault();
+      if (!e.touches) {
+        e.preventDefault();
+      }
       const speedFactor = 3;
       if (e.deltaY) {
         projectCardsWrapperRef.current.scrollLeft += e.deltaY * speedFactor;
