@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useElementOnScreen from "../../../utils/useElementOnScreen";
 import ProjectCard from "../../ProjectCard/ProjectCard";
 import AnimatedTitle from "../../animations/TitleAnimation/AnimatedTitle";
@@ -69,10 +69,42 @@ function ProjectsPage() {
     }
   }, [openProject, carouselRef, imageLoaded]);
 
+  const handleWheel = useCallback(
+    (e) => {
+      e.preventDefault();
+      const speedFactor = 3;
+      if (e.deltaY) {
+        requestAnimationFrame(() => {
+          projectCardsWrapperRef.current.scrollLeft += e.deltaY * speedFactor;
+        });
+      }
+    },
+    [projectCardsWrapperRef]
+  );
+
+  useEffect(() => {
+    const container = projectCardsWrapperRef.current;
+    const wheelHandler = (e) => handleWheel(e);
+
+    if (openProject) {
+      container.addEventListener("wheel", wheelHandler, { passive: false });
+    } else {
+      container.removeEventListener("wheel", wheelHandler);
+    }
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      container.removeEventListener("wheel", wheelHandler);
+    };
+  }, [handleWheel, projectCardsWrapperRef, openProject]);
+
   return (
     <ProjectsPageContainer id="projects">
       <AnimatedTitle text={["My", "Projects"]} />
-      <ProjectCardsWrapper $openProject={openProject} ref={projectCardsWrapperRef}>
+      <ProjectCardsWrapper
+        $openProject={openProject}
+        ref={projectCardsWrapperRef}
+      >
         {projects.map((project, index) => (
           <ProjectCard
             key={index}
@@ -130,8 +162,8 @@ function ProjectsPage() {
           </CarouselWrapper>
           <InformationWrapper>
             <ProjectTitle>{projectData.title}</ProjectTitle>
-            {projectData.description.map((el) => (
-              <StyledP>{el}</StyledP>
+            {projectData.description.map((el, i) => (
+              <StyledP key={i}>{el}</StyledP>
             ))}
             <GithubLink href={projectData.githubLink} target="_blank">
               Link to Github <img src={GithubIcon} alt="Github icon" />
