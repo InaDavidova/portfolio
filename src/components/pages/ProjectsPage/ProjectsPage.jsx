@@ -35,6 +35,9 @@ function ProjectsPage() {
   const [activeImageNumber, setActiveImageNumber] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const carouselRef = useRef();
+  const carouselTouchStartX = useRef(0);
+  const carouselTouchEndX = useRef(0);
+  const isCarouselSwiped = useRef(false);
   const [projectCardsWrapperRef, isVisible] = useElementOnScreen({
     root: null,
     rootMargin: "0px",
@@ -98,6 +101,39 @@ function ProjectsPage() {
     };
   }, [handleWheel, projectCardsWrapperRef, openProject]);
 
+  const incrementActiveImageNumber = () => {
+    setActiveImageNumber(activeImageNumber + 1);
+  };
+
+  const dencrementActiveImageNumber = () => {
+    activeImageNumber === 0
+      ? setActiveImageNumber(numberOfImages - 1)
+      : setActiveImageNumber(activeImageNumber - 1);
+  };
+
+  const handleTouchStart = (e) => {
+    carouselTouchStartX.current = e.touches[0].clientX; // Capture the starting touch position
+  };
+
+  const handleTouchMove = (e) => {
+    isCarouselSwiped.current = true;
+    carouselTouchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const distance = carouselTouchStartX.current - carouselTouchEndX.current;
+    if (!isCarouselSwiped.current) return;
+    if (distance > 50) {
+      // Swiped left
+      incrementActiveImageNumber();
+    } else if (distance < -50) {
+      // Swiped right
+      dencrementActiveImageNumber();
+    }
+
+    isCarouselSwiped.current = false;
+  };
+
   return (
     <ProjectsPageContainer id="projects">
       <AnimatedTitle text={["My", "Projects"]} />
@@ -121,7 +157,12 @@ function ProjectsPage() {
           <CloseButton onClick={() => setOpenProject("")}>
             {"\u2716"}
           </CloseButton>
-          <CarouselWrapper ref={carouselRef}>
+          <CarouselWrapper
+            ref={carouselRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             {projectData.images.map((img, index) => (
               <CarouselImage
                 key={index}
@@ -134,18 +175,10 @@ function ProjectsPage() {
             ))}
             {numberOfImages > 1 && (
               <>
-                <ButtonLeft
-                  onClick={() =>
-                    activeImageNumber === 0
-                      ? setActiveImageNumber(numberOfImages - 1)
-                      : setActiveImageNumber(activeImageNumber - 1)
-                  }
-                >
+                <ButtonLeft onClick={dencrementActiveImageNumber}>
                   <LeftArrow />
                 </ButtonLeft>
-                <ButtonRight
-                  onClick={() => setActiveImageNumber(activeImageNumber + 1)}
-                >
+                <ButtonRight onClick={incrementActiveImageNumber}>
                   <RightArrow />
                 </ButtonRight>
                 <DotButtonsContainer>
