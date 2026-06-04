@@ -1,0 +1,22 @@
+export const colorTokens = {
+  accent: "#ff9900",
+  accentAlpha50: "#ff990080",
+  backgroundDark: "#000417",
+  backgroundDark56: "#00041790",
+  backgroundDark44: "#00041770",
+  mint: "#b7fae6",
+  white: "#ffffff",
+  black: "#000000",
+  neutralMid: "#555555",
+  success: "#4bf84b",
+  danger: "#ff5555",
+  disabledBg: "#747171",
+  disabledText: "#424141",
+  particleBlue: "#9cffff",
+  particleLink: "#41816e",
+  particleText: "#2cffc0",
+  svgLavender: "#a3a3cd",
+  svgBrown: "#472b29",
+  svgCream: "#fefdef",
+} as const;
+
